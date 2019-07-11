@@ -6,26 +6,19 @@ namespace SuperMercado
     [Table("Item")]
     public class Item
     {
-        //Propiedad automatica para el producto del Item        
-        [Column("idProducto")]
-        public short idProducto { get; set; }
-        [ForeignKey("idProducto")]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column("idItem")]
+        public int Id { get; set; }
+        [ForeignKey("idProducto"), Required]
         public Producto Producto { get; set; }
 
-        //Propiedad Automatica para FK a su correspondiente Ticket
-        [Column("idTicket")]
-        public int idTicket { get; set; }
-        [ForeignKey("idTicket")]
-        [Required]
+        [ForeignKey("idTicket"), Required]
         public Ticket Ticket { get; set; }
 
-        [Column("cantidad")]
-        [Required]
+        [Column("cantidad"), Required]
         public short Cantidad { get; set; }
 
-        [Column("precioUnitario")]
-        [Required]
+        [Column("precioUnitario"), Required]
         public float PrecioUnitario { get; set; }
         //Constructor por defecto
         public Item() { }

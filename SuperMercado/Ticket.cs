@@ -9,17 +9,17 @@ namespace SuperMercado
     [Table("Ticket")]
     public class Ticket
     {
-        //Propiedad automatica agregada para la persistencia
-        [Column("idTicket")]
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column("idTicket")]
         public int Id { get; set; }
-        [Column("fechaHora")]
-        [Required]
+
+        [Column("fechaHora"), Required]
         public DateTime FechaHora { get; set; }
+
+        //Ya mapeado en Item
         public List<Item> Items { get; set; }
 
-        [Column("confirmado")]
-        [Required]
+        [Column("confirmado"), Required]
         public bool Confirmado { get; set; } = false;
         public Ticket()
         {
@@ -38,7 +38,11 @@ namespace SuperMercado
 
         public void agregarProducto(Producto producto, short cantidad)
         {
+            //Busco si existe actualmente algun item para el producto
+            //del parametro y este ticket
             Item item = Items.FirstOrDefault(i => i.Producto == producto);
+
+            //si no lo encuentro, creo uno.
             if (item == null)
             {
                 item = new Item()
@@ -48,6 +52,9 @@ namespace SuperMercado
                     Cantidad = 0                    
                 };
             }
+            
+            //incremento la cantida del item, en base a lo recibido por parametro
+            item.Cantidad += cantidad;
 
         }
         public void confirmar()

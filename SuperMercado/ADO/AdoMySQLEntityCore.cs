@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using MySql.Data.EntityFrameworkCore.Extensions;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SuperMercado.ADO
 {
@@ -13,6 +9,8 @@ namespace SuperMercado.ADO
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<HistorialPrecio> HistorialPrecios { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
         
         public void agregarCategoria(Categoria categoria)
         {
@@ -45,7 +43,7 @@ namespace SuperMercado.ADO
         {
             producto.HistorialPrecios = HistorialPrecios
                                        .Where(h => h.Producto == producto)
-                                       .ToList();
+                                       .ToList();            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
