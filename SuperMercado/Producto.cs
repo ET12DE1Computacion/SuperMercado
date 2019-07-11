@@ -1,17 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace SuperMercado
 {
+    [Table("Producto")]
     public class Producto
     {
+        //Propiedad automatica para la persistencia del producto
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column("idProducto")]
+        public short Id { get; set; }
+        
         //Propiedad Automatica para Categoria del Producto
+        [ForeignKey("idCategoria"),Required]
         public Categoria Categoria { get; set; }
+
+        [Column("nombre"), StringLength(60), Required]
         public string Nombre { get; set; }
+
+        [Column("precioUnitario"), Required]
         public float PrecioUnitario { get; set; }
+
+        [Column("cantidad"), Required]
         public short Cantidad { get; set; }
         //Propiedad automatica para la Lista de Historiales de precios
+
         public List<HistorialPrecio> HistorialPrecios { get; set; }
         //Constructor vacio, inicializa la lista
         public Producto()
@@ -32,7 +48,7 @@ namespace SuperMercado
         public void cambiarPrecioUnitario(float precio)
         {
             PrecioUnitario = precio;
-            HistorialPrecio historia = new HistorialPrecio(precio);
+            HistorialPrecio historia = new HistorialPrecio(this);
             HistorialPrecios.Add(historia);
             //las 2 lineas de arriba se pueden expresar tambien como
             //HistorialPrecios.Add(new HistorialPrecio(precio));            
