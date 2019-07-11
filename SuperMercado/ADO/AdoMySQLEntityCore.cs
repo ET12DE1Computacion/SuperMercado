@@ -48,7 +48,7 @@ namespace SuperMercado.ADO
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=supermercado;user=root;password=12Lujho");            
+            optionsBuilder.UseMySQL("server=localhost;database=supermercado;user=root;password=root");            
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
