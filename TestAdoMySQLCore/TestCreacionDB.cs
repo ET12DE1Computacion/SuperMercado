@@ -8,9 +8,7 @@ namespace TestAdoMySQLCore
     public class TestCreacionDB
     {
         public static AdoMySQLEntityCore AdoMySQL { get; set; }
-        public Categoria Gaseosa { get; set; }
-        public Categoria Lacteo { get; set; }
-
+        
         [ClassInitialize]
         public static void SetUpClase(TestContext context)
         {
@@ -21,7 +19,7 @@ namespace TestAdoMySQLCore
         [TestMethod]
         public void SeCreaDB()
         {
-            AdoMySQL.Database.EnsureCreated();            
+            AdoMySQL.Database.EnsureCreated();           
         }
     }
 }

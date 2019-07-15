@@ -17,9 +17,12 @@ namespace SuperMercado
         public DateTime FechaHora { get; set; }
 
         //Ya mapeado en Item
-        public List<Item> Items { get; set; }
+        public List <Item> Items { get; set; }
 
-        [Column("confirmado"), Required]
+        //Propiedad automatica para el estado del ticket
+        //Como el proveedor de MySQL tiene problemas con el tipo bool
+        //explicitamos que haga el map como un ti
+        [Column("confirmado", TypeName = "Tinyint"), Required]
         public bool Confirmado { get; set; } = false;
         public Ticket()
         {
@@ -43,19 +46,16 @@ namespace SuperMercado
             Item item = Items.FirstOrDefault(i => i.Producto == producto);
 
             //si no lo encuentro, creo uno.
-            if (item == null)
+            if (item is null)
             {
-                item = new Item()
-                {
-                    Producto = producto,
-                    Ticket = this,
-                    Cantidad = 0                    
-                };
+                item = new Item(producto, this, cantidad);
+                agregartItem(item);
             }
-            
-            //incremento la cantida del item, en base a lo recibido por parametro
-            item.Cantidad += cantidad;
-
+            else
+            {
+                //incremento la cantida del item, en base a lo recibido por parametro
+                item.Cantidad += cantidad;
+            }
         }
         public void confirmar()
         {
