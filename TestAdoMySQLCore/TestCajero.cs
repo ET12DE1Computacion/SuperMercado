@@ -19,25 +19,40 @@ namespace TestAdoMySQLCore
             var ado = new AdoMySQLEntityCore();
             ado.Database.EnsureDeleted();
             ado.Database.EnsureCreated();
-        }
-
-        [TestInitialize]
-        public void setAdo()
-        {
-            Ado = new AdoMySQLEntityCore();
-        }
+        }        
 
         [TestMethod]
-        public void altaCajero()
+        public void persistenciaCajero()
         {
+            Ado = new AdoMySQLEntityCore();
+            string passEncriptada = EncryptProvider.Sha256("123456");
+            string otraPass = EncryptProvider.Sha256("2354567");
+            int dni = 1000000;
+            int otroDni = 999;
+
             Cajero cajero = new Cajero()
             {
-                Dni = 1000000,
-                Nombre = "Pepe",
-                Apellido = "Lotas de Humo",
-                Password = EncryptProvider.Sha256("Argento")
+                Dni = dni,
+                Nombre = "Juan",
+                Apellido = "Gomez",
+                Password = passEncriptada
             };
             Ado.altaCajero(cajero);
+
+            Ado = new AdoMySQLEntityCore();
+
+            Cajero cajero2 = Ado.cajeroPorDniPass(dni, otraPass);
+            Assert.IsNull(cajero2);
+
+            Cajero cajero3 = Ado.cajeroPorDniPass(otroDni, passEncriptada);
+            Assert.IsNull(cajero3);
+
+            Cajero cajero4 = Ado.cajeroPorDniPass(otroDni, otraPass);
+            Assert.IsNull(cajero4);
+
+            Cajero cajero5 = Ado.cajeroPorDniPass(dni, passEncriptada);
+            Assert.IsNotNull(cajero5);
+            Assert.AreEqual("Gomez, Juan", cajero5.NombreCompleto);
         }
     }
 }
