@@ -11,6 +11,7 @@ namespace SuperMercado.ADO
         public DbSet<HistorialPrecio> HistorialPrecios { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Cajero> Cajeros { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -72,6 +73,15 @@ namespace SuperMercado.ADO
                     .Include(item => item.Producto)
                         .ThenInclude(produ => produ.Categoria)
                     .ToList();
-        }        
+        }
+
+        public Cajero cajeroPorDniPass(int dni, string passEncriptada)
+            => Cajeros.FirstOrDefault(c => c.Dni == dni && c.Password == passEncriptada);
+
+        public void altaCajero(Cajero cajero)
+        {
+            Cajeros.Add(cajero);
+            SaveChanges();
+        }
     }
 }
