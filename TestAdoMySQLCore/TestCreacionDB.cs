@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SuperMercado;
 using SuperMercado.ADO;
 
 namespace TestAdoMySQLCore
@@ -12,7 +11,8 @@ namespace TestAdoMySQLCore
         [ClassInitialize]
         public static void SetUpClase(TestContext context)
         {
-            AdoMySQL = new AdoMySQLEntityCore();
+            //AdoMySQL = new AdoMySQLEntityCore();
+            AdoMySQL = FactoryAdoMySQL.GetAdoDesdeJson("appsettings.json", "root");
             AdoMySQL.Database.EnsureDeleted();
         }
 

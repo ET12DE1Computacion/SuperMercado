@@ -13,11 +13,9 @@ namespace SuperMercado.ADO
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Cajero> Cajeros { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //Usar los datos usuario y pass del SGBD de la terminal donde se va a usar
-            optionsBuilder.UseMySQL("server=localhost;database=supermercado;user=supermercado;password=supermercado");
-        }
+        public AdoMySQLEntityCore() : base() { }
+
+        internal AdoMySQLEntityCore(DbContextOptions dbo) : base(dbo) { }
 
         public void agregarCategoria(Categoria categoria)
         {
