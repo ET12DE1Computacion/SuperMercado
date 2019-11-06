@@ -19,9 +19,15 @@ namespace SuperMercado
         //Ya mapeado en Item
         public List <Item> Items { get; set; }
 
+        //La siguiente propiedad, recorre cada uno de los items y
+        //devuelve una colección con los productos del ticket.
+        [NotMapped]
+        public List<Producto> Productos =>
+            Items.Select(i => i.Producto).ToList();
+
         //Propiedad automatica para el estado del ticket
         //Como el proveedor de MySQL tiene problemas con el tipo bool
-        //explicitamos que haga el map como un ti
+        //explicitamos que haga el map como un tinyint
         [Column("confirmado", TypeName = "Tinyint"), Required]
         public bool Confirmado { get; set; } = false;
         public Ticket()
