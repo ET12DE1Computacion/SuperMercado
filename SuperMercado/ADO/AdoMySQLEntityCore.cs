@@ -81,5 +81,7 @@ namespace SuperMercado.ADO
             Cajeros.Add(cajero);
             SaveChanges();
         }
+
+        public List<Cajero> obtenerCajeros() => Cajeros.ToList();
     }
 }

@@ -23,8 +23,12 @@ namespace SuperMercado.ADO
         void agregarTicket(Ticket ticket);
         void actualizarTicket(Ticket ticket);
         List<Ticket> obtenerTickets();
+        #endregion
+
+        #region Cajero
         void altaCajero(Cajero cajero);
         Cajero cajeroPorDniPass(int dni, string passEncriptada);
+        List<Cajero> obtenerCajeros();
         #endregion
     }
 }

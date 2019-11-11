@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "BiblioMenu/1.0.0": {
+      "BiblioMenu/1.0.2": {
         "runtime": {
           "BiblioMenu.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "BiblioMenu/1.0.0": {
+    "BiblioMenu/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
