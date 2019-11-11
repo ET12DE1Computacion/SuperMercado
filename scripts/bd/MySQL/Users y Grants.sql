@@ -7,3 +7,4 @@ CREATE USER IF NOT EXISTS 'gerenteSuper'@'localhost' IDENTIFIED BY 'passGerente'
 GRANT SELECT, INSERT on Categoria to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT, UPDATE(nombre, cantidad, precioUnitario) on Producto to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT on HistorialPrecio to 'gerenteSuper'@'localhost';
+GRANT SELECT(dni, nombre, apellido), INSERT on Cajero TO 'gerenteSuper'@'localhost';
