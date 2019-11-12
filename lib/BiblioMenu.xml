@@ -37,6 +37,13 @@
             <param name="cadena">Cadena que se desea mostrar, se la agrega ': '</param>
             <returns>string ingresado por el usuario en respuesta</returns>
         </member>
+        <member name="M:MenuesConsola.MenuComponente.preguntaCerrada(System.String)">
+            <summary>
+            Método que muestra una pregunta cerrada y espera una respuesta
+            </summary>
+            <param name="cadena">Pregunta cerrada</param>
+            <returns>Valor de verdad de la respuesta</returns>
+        </member>
         <member name="M:MenuesConsola.MenuComponente.leerOpcion(System.Byte)">
             <summary>
             Método que lee un valor numerico por debajo de la cantidad de opciones
@@ -53,6 +60,12 @@
             <summary>
             Constructor por defecto
             </summary>
+        </member>
+        <member name="M:MenuesConsola.MenuCompuesto.#ctor(System.String)">
+            <summary>
+            Constructor con nombre
+            </summary>
+            <param name="nombre"></param>
         </member>
         <member name="M:MenuesConsola.MenuCompuesto.#ctor(MenuesConsola.MenuComponente)">
             <summary>
@@ -82,6 +95,11 @@
             Menu encargado de mostrar una colección
             </summary>
             <typeparam name="T">Tipo de la Coleccion</typeparam>
+        </member>
+        <member name="M:MenuesConsola.MenuListador`1.mostrar">
+            <summary>
+            Método encargado de mostrar por pantalla el listado de objetos T
+            </summary>
         </member>
         <member name="M:MenuesConsola.MenuListador`1.imprimirElemento(`0)">
             <summary>

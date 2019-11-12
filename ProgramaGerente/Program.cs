@@ -12,6 +12,8 @@ namespace ProgramaGerente
             var menuAltaCajero = new MenuAltaCajero() { Nombre = "Alta Cajero" };
             var menuListaCajeros = new MenuListaCajeros() { Nombre = "Listado Cajeros" };
             var menuAltaProducto = new MenuAltaProducto(menuListaCategoria);
+            var menuListadorProductos = new MenuListadorProducto() { Nombre = "Listado Productos" };
+            var menuModificarProducto = new MenuModificarProducto() { Nombre = "Modificar producto" };
 
             var menuCategoria = new MenuCompuesto() { Nombre = "Categorias" };
             menuCategoria.agregarMenu(menuAltaCategoria);
@@ -22,6 +24,8 @@ namespace ProgramaGerente
             menuCajero.agregarMenu(menuAltaCajero);
 
             var menuProducto = new MenuCompuesto(menuAltaProducto) { Nombre = "Productos" };
+            menuProducto.agregarMenu(menuListadorProductos);
+            menuProducto.agregarMenu(menuModificarProducto);
             
             var menuPrincipal = new MenuCompuesto() { Nombre = "Menu Gerente" };
             menuPrincipal.agregarMenu(menuCategoria);

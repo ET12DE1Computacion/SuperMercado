@@ -60,5 +60,8 @@ namespace SuperMercado
             return  HistorialPrecios.FindAll(h => h.entre(inicio, fin)).
                                      Average(h => h.PrecioUnitario);                    
         }
+
+        public override string ToString()
+            => $"{Nombre} - {Categoria.Nombre} - Cantidad: {Cantidad} - ${PrecioUnitario:0.00}c/u";
     }
 }

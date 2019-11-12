@@ -31,7 +31,7 @@ namespace SuperMercado.ADO
 
         public void actualizarProducto(Producto producto)
         {
-            this.Update<Producto>(producto);
+            this.Attach<Producto>(producto);
             SaveChanges();
         }
 
