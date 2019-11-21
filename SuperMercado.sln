@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSuperMercadoCore", "Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAdoMySQLCore", "TestAdoMySQLCore\TestAdoMySQLCore.csproj", "{EDEC51D4-407F-4D80-BCA5-9FEE82F5A9B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramaGerente", "ProgramaGerente\ProgramaGerente.csproj", "{DC412F02-D6D6-4A14-9A67-D65407516DF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgramaGerente", "ProgramaGerente\ProgramaGerente.csproj", "{DC412F02-D6D6-4A14-9A67-D65407516DF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramaCajero", "ProgramaCajero\ProgramaCajero.csproj", "{BAF5A7EA-A0AF-4601-9938-8E0079A79B05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DC412F02-D6D6-4A14-9A67-D65407516DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC412F02-D6D6-4A14-9A67-D65407516DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC412F02-D6D6-4A14-9A67-D65407516DF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAF5A7EA-A0AF-4601-9938-8E0079A79B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAF5A7EA-A0AF-4601-9938-8E0079A79B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAF5A7EA-A0AF-4601-9938-8E0079A79B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAF5A7EA-A0AF-4601-9938-8E0079A79B05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
