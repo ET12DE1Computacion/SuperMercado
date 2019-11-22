@@ -57,7 +57,10 @@ namespace SuperMercado.ADO
                     .ToList();
         }
 
-        public List<Ticket> obtenerTickets() => Tickets.ToList();
+        public List<Ticket> obtenerTickets()
+            => Tickets.
+               Include(t => t.Cajero).
+               ToList();
 
         public void actualizarTicket(Ticket ticket)
         {

@@ -16,6 +16,9 @@ namespace SuperMercado
         [Column("fechaHora"), Required]
         public DateTime FechaHora { get; set; }
 
+        [ForeignKey("dniCajero"), Required]
+        public Cajero Cajero { get; set; }
+
         //Ya mapeado en Item
         public List <Item> Items { get; set; }
 
@@ -34,6 +37,11 @@ namespace SuperMercado
         {
             FechaHora = DateTime.Now;
             Items = new List<Item>();
+        }
+
+        public Ticket(Cajero cajero): this()
+        {
+            Cajero = cajero;
         }
 
         //Indico que la propiedad es un calculo
