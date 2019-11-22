@@ -61,7 +61,7 @@ namespace SuperMercado.ADO
 
         public void actualizarTicket(Ticket ticket)
         {
-            this.Update<Ticket>(ticket);
+            this.Attach<Ticket>(ticket);
             SaveChanges();
         }
         public List<Item> itemsDe(Ticket ticket)
