@@ -6,12 +6,8 @@ using System.Linq;
 
 namespace SuperMercado
 {
-    [Table("Producto")]
     public class Producto
     {
-        //Propiedad automatica para la persistencia del producto
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column("idProducto")]
         public short Id { get; set; }
         
         //Propiedad Automatica para Categoria del Producto
