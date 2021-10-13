@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NETCore.Encrypt" Version="2.0.8" />
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.9.1" />
     <PackageReference Include="ReadLine" Version="2.0.1" />
   </ItemGroup>
 
