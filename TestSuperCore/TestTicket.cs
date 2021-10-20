@@ -18,15 +18,18 @@ namespace TestSuperCore
         public static void fixture(TestContext context)
         {
             Gaseosa = new Rubro() { Nombre = "Gaseosa " };
-            CocaCola = new Producto(100)
+            CocaCola = new Producto()
             {
                 Rubro = Gaseosa,
-                Nombre = "Coca Cola 2.25 L."
+                Nombre = "Coca Cola 2.25 L.",
+                PrecioUnitario = 100
+
             };
-            CunningtonPome = new Producto(40)
+            CunningtonPome = new Producto()
             {
                 Rubro = Gaseosa,
-                Nombre = "Cunnignton Pomelo 2.25 L."
+                Nombre = "Cunnignton Pomelo 2.25 L.",
+                PrecioUnitario = 40
             };
             ItemCoca = new Item(CocaCola, 5);
             ItemPomelo = new Item(CunningtonPome, 2);

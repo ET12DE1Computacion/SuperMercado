@@ -39,15 +39,6 @@ namespace TestSuperCore
         }
 
         [TestMethod]
-        public void ProductoCambiarPrecio()
-        {
-            Assert.AreEqual(2, CocaCola.HistorialPrecios.Count);    
-            CocaCola.CambiarPrecioUnitario(175F);
-            Assert.AreEqual(3, CocaCola.HistorialPrecios.Count);
-            Assert.AreEqual(175F, CocaCola.PrecioUnitario, 0.01);            
-        }
-
-        [TestMethod]
         public void ProductoPrecioPromedioEntre()
         {
             DateTime inicio = new DateTime(2019, 06, 25);

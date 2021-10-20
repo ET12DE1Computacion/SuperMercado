@@ -128,10 +128,5 @@ namespace SuperMercado.ADO.MySQL
         {
             throw new NotImplementedException();
         }
-
-        List<HistorialPrecio> IADO.HistorialDe(Producto producto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

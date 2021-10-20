@@ -15,8 +15,11 @@ namespace TestSuperCore
         [ClassInitialize]
         public static void iniciarCoca(TestContext context)
         {
-            CocaCola = new Producto(100);
-            CocaCola.Nombre = "Coca Cola";            
+            CocaCola = new Producto()
+            {
+                PrecioUnitario = 100,
+                Nombre = "Coca Cola"
+            };
         }
 
 
@@ -33,13 +36,6 @@ namespace TestSuperCore
         public void testTotalItem()
         {
             Assert.AreEqual(200f, Item.TotalItem, 0.01);
-        }
-
-        [TestMethod]
-        public void testDecrementoProducto()
-        {
-            Item.decrementarProducto();
-            Assert.AreEqual(48, CocaCola.Cantidad);
         }
     }
 }
