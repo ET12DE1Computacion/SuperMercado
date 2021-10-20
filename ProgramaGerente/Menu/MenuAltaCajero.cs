@@ -30,7 +30,7 @@ namespace ProgramaGerente.Menu
 
             try
             {
-                AdoGerente.ADO.altaCajero(Cajero);
+                AdoGerente.ADO.AltaCajero(Cajero);
                 Console.WriteLine("Cajero dada de alta con exito");
             }
             catch (Exception e)

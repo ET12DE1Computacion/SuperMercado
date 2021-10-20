@@ -10,8 +10,8 @@ namespace TestAdoMySQLCore
     [TestClass]
     public class TestPersistencia
     {
-        static Categoria Gaseosa { get; set; }
-        static Categoria Cereal{ get; set; }
+        static Rubro Gaseosa { get; set; }
+        static Rubro Cereal{ get; set; }
         static Producto Cola { get; set; }
         static Producto Sprite { get; set; }
         static Producto CerealTrix { get; set; }
@@ -31,8 +31,8 @@ namespace TestAdoMySQLCore
 
         private static void intanciarPropiedadesEstaticas()
         {
-            Gaseosa = new Categoria("Gaseosa");
-            Cereal = new Categoria("Cereal");
+            Gaseosa = new Rubro("Gaseosa");
+            Cereal = new Rubro("Cereal");
             Cola = new Producto(45)
             {
                 Nombre = "Manaos Cola 2.25L",
@@ -54,14 +54,14 @@ namespace TestAdoMySQLCore
 
             TicketGaseosas = new Ticket();
             TicketGaseosas.FechaHora = new DateTime(2019, 1, 1, 12, 0, 0);
-            TicketGaseosas.agregarProducto(Cola, 2);
-            TicketGaseosas.agregarProducto(Cola, 1);
-            TicketGaseosas.agregarProducto(Sprite, 3);
+            TicketGaseosas.AgregarProducto(Cola, 2);
+            TicketGaseosas.AgregarProducto(Cola, 1);
+            TicketGaseosas.AgregarProducto(Sprite, 3);
 
             TicketMix = new Ticket();
             TicketMix.FechaHora = new DateTime(2019, 6, 15, 18, 0, 0);
-            TicketMix.agregarProducto(CerealTrix, 5);
-            TicketMix.agregarProducto(Sprite, 2);
+            TicketMix.AgregarProducto(CerealTrix, 5);
+            TicketMix.AgregarProducto(Sprite, 2);
         }
 
         private static void agregarObjetosAPersistir()
@@ -83,7 +83,7 @@ namespace TestAdoMySQLCore
         [TestMethod]
         public void persistenciaCategorias()
         {
-            List<Categoria> categorias = Ado.obtenerCategorias();
+            List<Rubro> categorias = Ado.obtenerCategorias();
             Assert.IsTrue(categorias.Any(c=>c.Nombre=="Gaseosa"));
             Assert.IsTrue(categorias.Any(c=>c.Nombre=="Cereal"));
         }
@@ -93,7 +93,7 @@ namespace TestAdoMySQLCore
         {
             Producto manaos = Ado.obtenerProductos()
                                  .Find(p => p.Nombre == "Manaos Cola 2.25L");
-            manaos.cambiarPrecioUnitario(80);
+            manaos.CambiarPrecioUnitario(80);
             Ado.actualizarProducto(manaos);
             Producto manaos2 = Ado.obtenerProductos()
                                  .Find(p => p.Nombre == "Manaos Cola 2.25L");

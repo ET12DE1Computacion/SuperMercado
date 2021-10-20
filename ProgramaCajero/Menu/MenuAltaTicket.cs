@@ -43,12 +43,11 @@ namespace ProgramaCajero.Menu
         {
             try
             {
-                AdoCajero.ADO.agregarTicket(Ticket);
+                AdoCajero.ADO.AgregarTicket(Ticket);
                 Console.Write("Ticket agregado con exito");
                 if (preguntaCerrada("¿Confirmar Ticket?"))
                 {
-                    Ticket.confirmar();
-                    AdoCajero.ADO.actualizarTicket(Ticket);
+                    AdoCajero.ADO.ActualizarTicket(Ticket);
                     Console.WriteLine("Actualizado con exito");
                 }
             }
@@ -63,7 +62,7 @@ namespace ProgramaCajero.Menu
             Console.WriteLine("Seleccione producto");
             var producto = seleccionador.seleccionarElemento();
             var cantidad = Convert.ToInt16(prompt("Ingrese cantidad a agregar"));
-            Ticket.agregarProducto(producto, cantidad);
+            Ticket.AgregarProducto(producto, cantidad);
             Console.WriteLine($"Subtotal: ${Ticket.TotalTicket:0.00}");
         }
     }

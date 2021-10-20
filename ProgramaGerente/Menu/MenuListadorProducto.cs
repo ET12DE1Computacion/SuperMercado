@@ -9,6 +9,6 @@ namespace ProgramaGerente.Menu
     {
         public override void imprimirElemento(Producto p) => Console.WriteLine(p.ToString());
 
-        public override List<Producto> obtenerLista() => AdoGerente.ADO.obtenerProductos();
+        public override List<Producto> obtenerLista() => AdoGerente.ADO.ObtenerProductos();
     }
 }

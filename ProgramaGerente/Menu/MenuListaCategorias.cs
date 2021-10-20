@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace ProgramaGerente.Menu
 {
-    public class MenuListaCategorias : MenuListador<Categoria>
+    public class MenuListaCategorias : MenuListador<Rubro>
     {
-        public override void imprimirElemento(Categoria elemento) 
+        public override void imprimirElemento(Rubro elemento) 
             => Console.WriteLine($"{elemento.Id} - {elemento.Nombre}");
 
-        public override List<Categoria> obtenerLista()
-            => AdoGerente.ADO.obtenerCategorias();
+        public override List<Rubro> obtenerLista()
+            => AdoGerente.ADO.ObtenerCategorias();
     }
 }

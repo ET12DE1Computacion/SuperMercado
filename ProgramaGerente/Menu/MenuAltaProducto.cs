@@ -30,13 +30,13 @@ namespace ProgramaGerente.Menu
             {
                 Nombre = nombre,
                 PrecioUnitario = precio,
-                Categoria = categoria,
+                Rubro = categoria,
                 Cantidad = cantidad
             };
 
             try
             {
-                AdoGerente.ADO.agregarProducto(Producto);
+                AdoGerente.ADO.AgregarProducto(Producto);
                 Console.WriteLine("Producto dado de alta con exito");
             }
             catch (Exception e)

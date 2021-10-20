@@ -7,7 +7,7 @@ namespace TestSuperCore
     [TestClass]
     public class TestTicket
     {
-        static Categoria Gaseosa { get; set; }
+        static Rubro Gaseosa { get; set; }
         static Producto CocaCola { get; set; }
         static Producto CunningtonPome { get; set; }
         static Item ItemCoca { get; set; }
@@ -17,15 +17,15 @@ namespace TestSuperCore
         [ClassInitialize]
         public static void fixture(TestContext context)
         {
-            Gaseosa = new Categoria() { Nombre = "Gaseosa " };
+            Gaseosa = new Rubro() { Nombre = "Gaseosa " };
             CocaCola = new Producto(100)
             {
-                Categoria = Gaseosa,
+                Rubro = Gaseosa,
                 Nombre = "Coca Cola 2.25 L."
             };
             CunningtonPome = new Producto(40)
             {
-                Categoria = Gaseosa,
+                Rubro = Gaseosa,
                 Nombre = "Cunnignton Pomelo 2.25 L."
             };
             ItemCoca = new Item(CocaCola, 5);
@@ -39,29 +39,14 @@ namespace TestSuperCore
             CunningtonPome.Cantidad = 10;
             Ticket = new Ticket();
             Ticket.FechaHora = new DateTime(2019, 06, 15);
-            Ticket.agregartItem(ItemCoca);
-            Ticket.agregartItem(ItemPomelo);
+            Ticket.AgregartItem(ItemCoca);
+            Ticket.AgregartItem(ItemPomelo);
         }
 
         [TestMethod]
         public void TestCantidadItems()
         {
             Assert.AreEqual(2, Ticket.Items.Count);
-        }
-
-        [TestMethod]
-        public void TestDecrementoPostConfirmar()
-        {
-            Assert.IsFalse(Ticket.Confirmado);
-            Assert.AreEqual(20, CocaCola.Cantidad);
-            Assert.AreEqual(10, CunningtonPome.Cantidad);
-            Ticket.confirmar();
-            Assert.IsTrue(Ticket.Confirmado);
-            Assert.AreEqual(15, CocaCola.Cantidad);
-            Assert.AreEqual(8, CunningtonPome.Cantidad);
-            Ticket.confirmar();
-            Assert.AreEqual(15, CocaCola.Cantidad);
-            Assert.AreEqual(8, CunningtonPome.Cantidad);
         }
 
         [TestMethod]

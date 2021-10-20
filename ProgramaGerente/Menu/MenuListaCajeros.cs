@@ -12,6 +12,6 @@ namespace ProgramaGerente.Menu
             Console.WriteLine($"{elemento.NombreCompleto}\t\t{elemento.Dni}");
         }
 
-        public override List<Cajero> obtenerLista() => AdoGerente.ADO.obtenerCajeros();
+        public override List<Cajero> obtenerLista() => AdoGerente.ADO.ObtenerCajeros();
     }
 }

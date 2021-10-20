@@ -1,34 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using SuperMercado.Product;
 
 namespace SuperMercado.ADO
 {
     public interface IADO
     {
         #region Categoria
-        void agregarCategoria(Categoria categoria);
-        List<Categoria> obtenerCategorias();
+        void AgregarCategoria(Rubro categoria);
+        List<Rubro> ObtenerCategorias();
         #endregion
 
         #region Producto
-        void agregarProducto(Producto producto);
-        void actualizarProducto(Producto producto);
-        List<Producto> obtenerProductos();
-        List<HistorialPrecio> historialDe(Producto producto);
+        void AgregarProducto(Producto producto);
+        void ActualizarProducto(Producto producto);
+        List<Producto> ObtenerProductos();
+        List<HistorialPrecio> HistorialDe(Producto producto);
+        ICollection<IngresoProducto> IngresosDe(Producto producto);
         #endregion
 
         #region Ticket
-        List<Item> itemsDe(Ticket ticket);
-        void agregarTicket(Ticket ticket);
-        void actualizarTicket(Ticket ticket);
-        List<Ticket> obtenerTickets();
+        List<Item> ItemsDe(Ticket ticket);
+        void AgregarTicket(Ticket ticket);
+        void ActualizarTicket(Ticket ticket);
+        List<Ticket> ObtenerTickets();
         #endregion
 
         #region Cajero
-        void altaCajero(Cajero cajero);
-        Cajero cajeroPorDniPass(int dni, string passEncriptada);
-        List<Cajero> obtenerCajeros();
+        void AltaCajero(Cajero cajero);
+        Cajero CajeroPorDniPass(int dni, string passEncriptada);
+        List<Cajero> ObtenerCajeros();
         #endregion
     }
 }

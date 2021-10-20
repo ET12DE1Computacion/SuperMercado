@@ -22,7 +22,7 @@ namespace ProgramaCajero.Menu
 
             try
             {
-                Cajero = AdoCajero.ADO.cajeroPorDniPass(dni, pass);
+                Cajero = AdoCajero.ADO.CajeroPorDniPass(dni, pass);
                 if (Cajero is null)
                 {
                     Console.WriteLine("DNI o contraseña incorrecta");

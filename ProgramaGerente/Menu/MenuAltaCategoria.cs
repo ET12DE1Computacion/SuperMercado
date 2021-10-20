@@ -6,16 +6,16 @@ namespace ProgramaGerente.Menu
 {
     public class MenuAltaCategoria: MenuComponente
     {
-        public Categoria Categoria { get; set; }
+        public Rubro Categoria { get; set; }
         public override void mostrar()
         {
             base.mostrar();
             Console.WriteLine();
             var nombre = prompt("Ingrese nombre categoria: ");
-            Categoria = new Categoria(nombre);
+            Categoria = new Rubro(nombre);
             try
             {
-                AdoGerente.ADO.agregarCategoria(Categoria);
+                AdoGerente.ADO.AgregarCategoria(Categoria);
                 Console.WriteLine("Categoria agregada con exito");
             }
             catch (Exception e)

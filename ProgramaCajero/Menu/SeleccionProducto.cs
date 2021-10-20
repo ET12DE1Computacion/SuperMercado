@@ -10,10 +10,10 @@ namespace ProgramaCajero.Menu
         public override void imprimirElemento(Producto producto)
             => Console.WriteLine(cadenaProducto(producto));
         private string cadenaProducto(Producto p)
-            => $"{p.Nombre} - {p.Categoria.Nombre} - {p.PrecioUnitario}";
+            => $"{p.Nombre} - {p.Rubro.Nombre} - {p.PrecioUnitario}";
         public override List<Producto> obtenerLista()
         {
-            return AdoCajero.ADO.obtenerProductos();
+            return AdoCajero.ADO.ObtenerProductos();
         }
     }
 }

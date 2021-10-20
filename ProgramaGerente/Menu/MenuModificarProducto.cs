@@ -28,7 +28,7 @@ namespace ProgramaGerente.Menu
             if (preguntaCerrada("¿Cambiar precio unitario?"))
             {
                 var precio = float.Parse(prompt("Precio Unitario"));
-                Producto.cambiarPrecioUnitario(precio);
+                Producto.CambiarPrecioUnitario(precio);
                 cambio = true;
             }
 
@@ -43,7 +43,7 @@ namespace ProgramaGerente.Menu
             {
                 try
                 {
-                    AdoGerente.ADO.actualizarProducto(Producto);
+                    AdoGerente.ADO.ActualizarProducto(Producto);
                     Console.WriteLine("Producto actualizado con exito");
                 }
                 catch (Exception e)
