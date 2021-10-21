@@ -1,5 +1,4 @@
 ﻿using MenuesConsola;
-using NETCore.Encrypt;
 using SuperMercado;
 using System;
 using static System.ReadLine;
@@ -18,7 +17,6 @@ namespace ProgramaCajero.Menu
 
             var dni = Convert.ToInt32(prompt("Ingrese dni"));
             var pass = ReadPassword("Ingrese contraseña: ");
-            pass = EncryptProvider.Sha256(pass);
 
             try
             {

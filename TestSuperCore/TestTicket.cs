@@ -55,7 +55,7 @@ namespace TestSuperCore
         [TestMethod]
         public void TestTotalTicket()
         {
-            Assert.AreEqual(580, Ticket.TotalTicket, 0.01);
+            Assert.AreEqual(580, Ticket.TotalTicket);
         }
     }
 }

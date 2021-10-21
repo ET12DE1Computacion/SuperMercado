@@ -5,9 +5,9 @@ namespace SuperMercado.ADO
 {
     public interface IADO
     {
-        #region Categoria
-        void AgregarCategoria(Rubro categoria);
-        List<Rubro> ObtenerCategorias();
+        #region Rubro
+        void AgregarRubro(Rubro rubro);
+        List<Rubro> ObtenerRubros();
         #endregion
 
         #region Producto

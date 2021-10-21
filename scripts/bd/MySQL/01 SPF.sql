@@ -35,3 +35,12 @@ BEGIN
     INSERT INTO IngresoStock (idProducto, cantidad, fechaHora)
                         VALUE   (unIdProducto, ingreso, now());
 END $$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS altaTicket $$
+CREATE PROCEDURE altaTicket (OUT undIdTicket INT, unDni INT UNSIGNED, unaFechaHora DATETIME)
+BEGIN
+    INSERT INTO Ticket  (dni, fechaHora)
+                VALUE   (unDni, unaFechaHora);
+    SET undIdTicket = LAST_INSERT_ID();
+END $$

@@ -12,6 +12,7 @@ BEGIN
     END IF;
 END $$
 
+DROP TRIGGER IF EXISTS aftUpdProducto $$
 CREATE TRIGGER aftUpdProducto AFTER UPDATE ON Producto
 FOR EACH ROW
 BEGIN
@@ -21,4 +22,11 @@ BEGIN
     IF (NEW.cantidad > OLD.cantidad) THEN
         CALL altaIngresoStock (NEW.idProducto, NEW.cantidad - OLD.cantidad);
     END IF;
-END
+END $$
+
+DROP TRIGGER IF EXISTS befInsCajero $$
+CREATE TRIGGER befInsCajero BEFORE INSERT ON Cajero
+FOR EACH ROW
+BEGIN
+    SET NEW.pass = SHA2(NEW.pass, 256);
+END $$

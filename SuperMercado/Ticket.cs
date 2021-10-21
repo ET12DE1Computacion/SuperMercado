@@ -19,7 +19,7 @@ namespace SuperMercado
         {
             Cajero = cajero;
         }
-        public float TotalTicket => Items.Sum(item =>item.TotalItem);
+        public decimal TotalTicket => Items.Sum(item =>item.TotalItem);
         public void AgregartItem(Item item) => Items.Add(item);
         public void AgregarProducto(Producto producto, short cantidad)
         {

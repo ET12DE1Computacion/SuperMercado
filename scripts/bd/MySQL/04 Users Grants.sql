@@ -19,17 +19,21 @@ GRANT SELECT, INSERT on Supermercado.Rubro to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT, UPDATE(nombre, cantidad, precioUnitario) on Supermercado.Producto to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT on Supermercado.HistorialPrecio to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT on Supermercado.Cajero TO 'gerenteSuper'@'localhost';
+GRANT EXECUTE ON PROCEDURE altaRubro TO 'gerenteSuper'@'localhost';
+GRANT EXECUTE ON PROCEDURE altaProducto TO 'gerenteSuper'@'localhost';
 
 # Grants cajero
 GRANT SELECT on Supermercado.Cajero to 'cajero'@'10.120.0.%';
 GRANT SELECT ON Supermercado.Rubro to 'cajero'@'10.120.0.%';
-GRANT SELECT, UPDATE(cantidad) on Supermercado.Producto to 'cajero'@'10.120.0.%'; 
+GRANT SELECT on Supermercado.Producto to 'cajero'@'10.120.0.%'; 
 GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'10.120.0.%'; 
-GRANT SELECT, INSERT, UPDATE ON Supermercado.Ticket to 'cajero'@'10.120.0.%'; 
+GRANT SELECT, INSERT, UPDATE ON Supermercado.Ticket to 'cajero'@'10.120.0.%';
+GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@'10.120.0.%';
 
 # Grants cajero pruebas locales
 GRANT SELECT ON Supermercado.Cajero to 'cajero'@'localhost';
 GRANT SELECT ON Supermercado.Rubro to 'cajero'@'localhost';
-GRANT SELECT, UPDATE(cantidad) on Supermercado.Producto to 'cajero'@'localhost';
+GRANT SELECT on Supermercado.Producto to 'cajero'@'localhost';
 GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'localhost';
 GRANT SELECT, INSERT ON Supermercado.Ticket to 'cajero'@'localhost';
+GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@

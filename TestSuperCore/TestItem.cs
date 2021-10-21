@@ -35,7 +35,7 @@ namespace TestSuperCore
         [TestMethod]
         public void testTotalItem()
         {
-            Assert.AreEqual(200f, Item.TotalItem, 0.01);
+            Assert.AreEqual(200, Item.TotalItem);
         }
     }
 }

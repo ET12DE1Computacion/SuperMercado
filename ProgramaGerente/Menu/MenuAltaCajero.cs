@@ -1,5 +1,4 @@
 ﻿using MenuesConsola;
-using NETCore.Encrypt;
 using SuperMercado;
 using System;
 using static System.ReadLine;
@@ -18,7 +17,6 @@ namespace ProgramaGerente.Menu
             var apellido = prompt("Ingrese apellido");
             //Uso la libreria System.ReadLine para leer una contraseña
             var pass = ReadPassword("Ingrese contraseña: ");
-            pass = EncryptProvider.Sha256(pass);
 
             Cajero = new Cajero()
             {

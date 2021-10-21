@@ -11,6 +11,6 @@ namespace ProgramaGerente.Menu
             => Console.WriteLine($"{elemento.Id} - {elemento.Nombre}");
 
         public override List<Rubro> obtenerLista()
-            => AdoGerente.ADO.ObtenerCategorias();
+            => AdoGerente.ADO.ObtenerRubros();
     }
 }

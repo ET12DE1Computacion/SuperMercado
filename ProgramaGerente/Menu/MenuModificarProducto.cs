@@ -27,8 +27,8 @@ namespace ProgramaGerente.Menu
 
             if (preguntaCerrada("¿Cambiar precio unitario?"))
             {
-                var precio = float.Parse(prompt("Precio Unitario"));
-                Producto.CambiarPrecioUnitario(precio);
+                var precio = decimal.Parse(prompt("Precio Unitario"));
+                Producto.PrecioUnitario = precio;
                 cambio = true;
             }
 

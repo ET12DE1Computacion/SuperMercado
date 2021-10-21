@@ -5,7 +5,7 @@
         public Producto Producto { get; set; }
         public Ticket Ticket { get; set; }
         public short Cantidad { get; set; }
-        public float PrecioUnitario { get; set; }
+        public decimal PrecioUnitario { get; set; }
         public Item() { }
         //Constructor que recibe un producto y una cantidad
         public Item(Producto producto, short cantidad)
@@ -20,6 +20,6 @@
         {
             Ticket = ticket;
         }
-        public float TotalItem => Cantidad * PrecioUnitario;
+        public decimal TotalItem => Cantidad * PrecioUnitario;
     }
 }

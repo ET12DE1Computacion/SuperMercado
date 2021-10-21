@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NETCore.Encrypt" Version="2.0.9.1" />
     <PackageReference Include="ReadLine" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SuperMercado.ADOMySQL\SuperMercado.ADO.MySQL.csproj" />
     <ProjectReference Include="..\SuperMercado\SuperMercado.Core.csproj" />
   </ItemGroup>
 

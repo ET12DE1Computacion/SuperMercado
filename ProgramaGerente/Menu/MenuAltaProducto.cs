@@ -1,5 +1,4 @@
 ﻿using MenuesConsola;
-using NETCore.Encrypt;
 using SuperMercado;
 using System;
 
@@ -21,12 +20,12 @@ namespace ProgramaGerente.Menu
             base.mostrar();
 
             var nombre = prompt("Ingrese nombre del producto");
-            var precio = float.Parse(prompt("Ingrese precio unitario"));
+            var precio = decimal.Parse(prompt("Ingrese precio unitario"));
             var cantidad = Convert.ToInt16(prompt("Ingrese stock"));
             Console.WriteLine("Seleccione una categoria x)");
             var categoria = MenuListaCategorias.seleccionarElemento();
 
-            Producto = new Producto(precio)
+            Producto = new Producto()
             {
                 Nombre = nombre,
                 PrecioUnitario = precio,

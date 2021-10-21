@@ -15,7 +15,7 @@ namespace ProgramaGerente.Menu
             Categoria = new Rubro(nombre);
             try
             {
-                AdoGerente.ADO.AgregarCategoria(Categoria);
+                AdoGerente.ADO.AgregarRubro(Categoria);
                 Console.WriteLine("Categoria agregada con exito");
             }
             catch (Exception e)

@@ -17,6 +17,11 @@ namespace SuperMercado.ADO.MySQL
             };
             return this;
         }
+        public BuilderParametro CrearParametroSalida(string nombre)
+            => CrearParametro(nombre)
+              .SetDireccion(ParameterDirection.Output)
+              .SetValor(null);
+
         public BuilderParametro CrearParametro(string nombre)
         {
             CrearParametro();

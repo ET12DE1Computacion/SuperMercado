@@ -10,7 +10,7 @@ namespace SuperMercado
         public short Id { get; set; }
         public Rubro Rubro { get; set; }
         public string Nombre { get; set; }
-        public float PrecioUnitario { get; set; }
+        public decimal PrecioUnitario { get; set; }
         public short Cantidad { get; set; }
 
         //Propiedad automatica para la Lista de Historiales de precios
