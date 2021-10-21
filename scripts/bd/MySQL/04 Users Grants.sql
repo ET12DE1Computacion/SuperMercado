@@ -36,4 +36,4 @@ GRANT SELECT ON Supermercado.Rubro to 'cajero'@'localhost';
 GRANT SELECT on Supermercado.Producto to 'cajero'@'localhost';
 GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'localhost';
 GRANT SELECT, INSERT ON Supermercado.Ticket to 'cajero'@'localhost';
-GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@
+GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@'localhost';
