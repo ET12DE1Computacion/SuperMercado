@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using SuperMercado.Product;
 using System.Data;
 using System.Text;
+using System.Globalization;
 
 namespace SuperMercado.ADO.MySQL
 {
@@ -140,12 +141,14 @@ namespace SuperMercado.ADO.MySQL
             AgregarParametro(unaFechaHora);
 
             EjecutarComando();
+            ticket.Id = Convert.ToInt32(unIdTicket.Value);
             AgregarItemsDe(ticket);
         }
 
         private void AgregarItemsDe(Ticket ticket)
         {
             Comando = new MySqlCommand();
+            Comando.Connection = Conexion;
             Comando.CommandType = CommandType.Text;
             var sb = new StringBuilder("INSERT INTO Item (idProducto, idTicket, cantidad, precioUnitario) VALUES ");
             sb.Append('(')
@@ -158,17 +161,35 @@ namespace SuperMercado.ADO.MySQL
                   .Append(TuplaValorItem(ticket.Items[i]))
                   .Append(')');
             }
+            Comando.CommandText = sb.ToString();
             EjecutarComando();
         }
         private string TuplaValorItem(Item item)
-            => $"{item.Producto.Id}, {item.Ticket.Id}, {item.Cantidad}, {item.PrecioUnitario}";
+            => $"{item.Producto.Id}, {item.Ticket.Id}, {item.Cantidad}, {item.PrecioUnitario.ToString(new CultureInfo("en-US"))}";
         public void AltaCajero(Cajero cajero)
         {
             throw new NotImplementedException();
         }
         public Cajero CajeroPorDniPass(int dni, string passEncriptada)
         {
-            throw new NotImplementedException();
+            PrepararComandoSP("cajeroPorDniPass");
+            
+            var pDni = BP.CrearParametro("unDni")
+                         .SetTipo(MySqlDbType.UInt32)
+                         .SetValor(dni)
+                         .Parametro;
+            AgregarParametro(pDni);
+
+            var pPass = BP.CrearParametro("unaPass")
+                          .SetTipoVarchar(45)
+                          .SetValor(passEncriptada)
+                          .Parametro;
+            AgregarParametro(pPass);
+
+            var tabla = new DataTable();
+            Adaptador = new MySqlDataAdapter(Comando);
+            Adaptador.Fill(tabla);
+            return FilaACajero(tabla.Rows[0]);
         }
         public List<HistorialPrecio> HistorialDe(Producto producto)
         {
@@ -205,6 +226,20 @@ namespace SuperMercado.ADO.MySQL
             Id = Convert.ToByte(fila["idRubro"]),
             Nombre = fila["rubro"].ToString()
         };
+        private Cajero FilaACajero(DataRow fila)
+        {
+            Cajero cajero = null;
+            if (fila is not null)
+            {
+                cajero = new Cajero()
+                {
+                    Dni = Convert.ToInt32(fila["dni"]),
+                    Nombre = fila["nombre"].ToString(),
+                    Apellido = fila["apellido"].ToString()
+                };
+            }
+            return cajero;
+        }
 
         public List<Producto> ObtenerProductos()
         {

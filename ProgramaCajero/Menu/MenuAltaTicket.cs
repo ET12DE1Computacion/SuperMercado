@@ -44,12 +44,7 @@ namespace ProgramaCajero.Menu
             try
             {
                 AdoCajero.ADO.AgregarTicket(Ticket);
-                Console.Write("Ticket agregado con exito");
-                if (preguntaCerrada("¿Confirmar Ticket?"))
-                {
-                    AdoCajero.ADO.ActualizarTicket(Ticket);
-                    Console.WriteLine("Actualizado con exito");
-                }
+                Console.Write("Ticket agregado con exito");                
             }
             catch (Exception e)
             {

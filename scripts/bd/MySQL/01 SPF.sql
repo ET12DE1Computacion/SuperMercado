@@ -38,9 +38,18 @@ END $$
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS altaTicket $$
-CREATE PROCEDURE altaTicket (OUT undIdTicket INT, unDni INT UNSIGNED, unaFechaHora DATETIME)
+CREATE PROCEDURE altaTicket (OUT unIdTicket INT, unDni INT UNSIGNED, unaFechaHora DATETIME)
 BEGIN
     INSERT INTO Ticket  (dni, fechaHora)
                 VALUE   (unDni, unaFechaHora);
-    SET undIdTicket = LAST_INSERT_ID();
+    SET unIdTicket = LAST_INSERT_ID();
+END $$
+
+DROP PROCEDURE IF EXISTS cajeroPorDniPass $$
+CREATE PROCEDURE cajeroPorDniPass (unDni INT UNSIGNED, unaPass VARCHAR(45))
+BEGIN
+    SELECT  dni, nombre, apellido
+    FROM    Cajero
+    WHERE   dni = unDni
+    AND     pass = SHA2(unaPAss, 256);
 END $$
