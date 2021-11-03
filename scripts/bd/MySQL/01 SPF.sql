@@ -53,3 +53,11 @@ BEGIN
     WHERE   dni = unDni
     AND     pass = SHA2(unaPAss, 256);
 END $$
+
+DROP PROCEDURE IF EXISTS historialPrecioDe $$
+CREATE PROCEDURE historialPrecioDe (unIdProducto SMALLINT)
+BEGIN
+    SELECT  fechaHora, precioUnitario
+    FROM    HistorialPrecio
+    WHERE   idProducto = unIdProducto;
+END $$

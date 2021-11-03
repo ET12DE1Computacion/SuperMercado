@@ -50,6 +50,14 @@ namespace SuperMercado.ADO.MySQL
                 Conexion.Close();
             }
         }
+        public DataTable EjecutarComandoConFill()
+        {
+            var tabla = new DataTable();
+            Adaptador = new MySqlDataAdapter(Comando);
+            Adaptador.Fill(tabla);
+            return tabla;
+        }
+        
         public void ActualizarProducto(Producto producto)
         {
             throw new NotImplementedException();
@@ -186,15 +194,30 @@ namespace SuperMercado.ADO.MySQL
                           .Parametro;
             AgregarParametro(pPass);
 
-            var tabla = new DataTable();
-            Adaptador = new MySqlDataAdapter(Comando);
-            Adaptador.Fill(tabla);
-            return FilaACajero(tabla.Rows[0]);
+            return FilaACajero(EjecutarComandoConFill().Rows[0]);
         }
         public List<HistorialPrecio> HistorialDe(Producto producto)
         {
-            throw new NotImplementedException();
+            PrepararComandoSP("historialPrecioDe");
+
+            var unIdProducto = BP.CrearParametro("unIdProducto")
+                                 .SetTipo(MySqlDbType.Int16)
+                                 .SetValor(producto.Id)
+                                 .Parametro;
+            AgregarParametro(unIdProducto);
+
+            var tabla = EjecutarComandoConFill();
+            var lista = new List<HistorialPrecio>();
+            for (int i = 0; i < tabla.Rows.Count; i++)
+            {
+                lista.Add(FilaAHistorialPrecio(tabla.Rows[i], producto));
+            }
+            return lista;
         }
+
+        private HistorialPrecio FilaAHistorialPrecio(DataRow fila, Producto producto)
+            => new HistorialPrecio(producto, Convert.ToDateTime(fila["fechaHora"]), Convert.ToDecimal(fila["precioUnitario"]));
+
         public ICollection<IngresoProducto> IngresosDe(Producto producto)
         {
             throw new NotImplementedException();
@@ -211,9 +234,7 @@ namespace SuperMercado.ADO.MySQL
         {
             PrepararComandoSP("Rubro");
             Comando.CommandType = CommandType.TableDirect;
-            Adaptador = new MySqlDataAdapter(Comando);
-            var tabla = new DataTable();
-            Adaptador.Fill(tabla);
+            var tabla = EjecutarComandoConFill();
             var lista = new List<Rubro>();
             for (int i = 0; i < tabla.Rows.Count; i++)
             {
@@ -245,9 +266,7 @@ namespace SuperMercado.ADO.MySQL
         {
             PrepararComandoSP("Producto");
             Comando.CommandType = CommandType.TableDirect;
-            Adaptador = new MySqlDataAdapter(Comando);
-            var tabla = new DataTable();
-            Adaptador.Fill(tabla);
+            var tabla = EjecutarComandoConFill();
             var lista = new List<Producto>();
             for (int i = 0; i < tabla.Rows.Count; i++)
             {

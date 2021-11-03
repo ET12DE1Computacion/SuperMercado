@@ -27,7 +27,7 @@ namespace SuperMercado
             Cantidad -= unidades;
         }
 
-        public float PrecioPromedioEntre(DateTime inicio, DateTime fin) =>
+        public decimal PrecioPromedioEntre(DateTime inicio, DateTime fin) =>
             //Paso 1: filtro los Historiales que se encuentren entre esas fechas con el FindAll
             //Paso 2: sobre la lista filtrada, aplico el metodo para conocer el promedio
             HistorialPrecios.FindAll(h => h.Entre(inicio, fin)).
