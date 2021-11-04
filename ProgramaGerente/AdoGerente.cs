@@ -1,5 +1,5 @@
 ﻿using SuperMercado.ADO;
-using SuperMercado.ADO.MySQL;
+using et12.edu.ar.AGBD.Ado;
 
 namespace ProgramaGerente
 {
@@ -12,6 +12,6 @@ namespace ProgramaGerente
         /// Propiedad para acceso al ADO
         /// </summary>
         public static IADO ADO { get; set; } =
-            FactoryAdoMySQL.GetAdoDesdeJson("appsettings.json", "gerente");
+            FactoryAdoAGBD.GetAdoMySQL("appsettings.json", "gerente");
     }
 }

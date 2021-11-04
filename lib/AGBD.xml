@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AGBD</name>
+    </assembly>
+    <members>
+        <member name="T:et12.edu.ar.AGBD.Ado.AdoAGBD">
+            <summary>
+            Clase que contiene lo necesario para conectarse a una BD MySQL y correr SF y SP
+            </summary>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Ado.AdoAGBD.Conexion">
+            <summary>
+            Conexión Mysql
+            </summary>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Ado.AdoAGBD.Comando">
+            <summary>
+            Comando del AdoAGBD
+            </summary>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Ado.AdoAGBD.Adaptador">
+            <summary>
+            Adaptador del AdoAGBD
+            </summary>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.AdoAGBD.EjecutarComando">
+            <summary>
+            Abre la conexión, ejecuta el comando y cierra la conexión.
+            </summary>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.AdoAGBD.TablaDesdeSP(System.String)">
+            <summary>
+            Método que en base al nombre de un SP, devuelve la Tabla que trae el SP.
+            </summary>
+            <param name="nombreSP">Nombre del Stored Procedure.</param>
+            <returns>Datatable instanciado con la tabla que devuelve el SP</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.AdoAGBD.ColeccionDesdeSP``1(System.String,et12.edu.ar.AGBD.Mapeadores.Mapeador{``0})">
+            <summary>
+            Método genérico que en base al nombre de un SP y mapeador,
+            devuelve una colección del tipo del mapeador
+            </summary>
+            <typeparam name="T">Clase del mapeador donde se obtiene la Lista</typeparam>
+            <param name="nombreSP">Nombre del Stored Procedure</param>
+            <param name="mapeador">Clase que mapea T</param>
+            <returns>Coleccion del tipo T</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.AdoAGBD.EjecutarSF(System.String,System.Action{MySqlConnector.MySqlCommand},System.Boolean)">
+            <summary>
+            Método para ejecutar una Función Almacenada
+            </summary>
+            <param name="nombreSF">Nombre de la Función Almacenada</param>
+            <param name="configurarComandoSF">Método que configura el parametro</param>
+            <param name="setSalida">Opcion que indica si se deja un parametro de salida por defecto</param>
+            <returns>object que representa el escalar devuelto por la Función Almacenada</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.AdoAGBD.EjecutarComandoAsync">
+            <summary>
+            Abre la conexión, ejecuta el comando y cierra la conexión asincronicamente.
+            </summary>
+            <returns>Tarea del método.</returns>
+        </member>
+        <member name="T:et12.edu.ar.AGBD.Ado.FactoryAdoAGBD">
+            <summary>
+            Clase que abstrae de la creación de la conexión de <c>AdoAGBD</c>
+            </summary>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.FactoryAdoAGBD.GetAdoMySQL(System.String)">
+            <summary>
+            Método que devuelve una instancia de <c>AdoAGBD</c>
+            </summary>
+            <param name="cadena">Cadena de conexión plana</param>
+            <returns>Instancia de <c>AdoAGBD</c></returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Ado.FactoryAdoAGBD.GetAdoMySQL(System.String,System.String)">
+            <summary>
+            Método que devuelve una instancia de <c>AdoAGBD</c>.
+            </summary>
+            <param name="archivo">Archivo <c>.json</c> con ruta.</param>
+            <param name="nombreConexion">Nombre de la conexión.</param>
+            <returns>Instancia de <c>AdoAGBD</c></returns>
+        </member>
+        <member name="T:et12.edu.ar.AGBD.Mapeadores.BuilderParametro">
+            <summary>
+            Clase para asistir en la generación y configuración de parámetros de MySQLCommand.
+            </summary>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.Parametro">
+            <summary>
+            Parámetro que usa la clase para configurar y devolver.
+            </summary>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.CrearParametro">
+            <summary>
+            Método que instancia a Parametro. Por defecto la dirección es Input y valor DBNull
+            </summary>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.CrearParametro(System.String)">
+            <summary>
+            Método que instancia a Parametro con nombre. Por defecto la dirección es Input y valor DBNull
+            </summary>
+            <param name="nombre">Nombre del parámetro</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.CrearParametroSalida(System.String)">
+            <summary>
+            Método que instancia a Parametro con dirección Output
+            </summary>
+            <param name="nombre"></param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetNombre(System.String)">
+            <summary>
+            Método que setea un nombre al Parametro.
+            </summary>
+            <param name="nombre">Nombre a setear.</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetDireccion(System.Data.ParameterDirection)">
+            <summary>
+            Método que setea una dirección al Parametro.
+            </summary>
+            <param name="direccion">Dirección a setear.</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetValor(System.Object)">
+            <summary>
+            Método que setea un valor al Parametro. Si valor es nulo, setea DBNull.
+            </summary>
+            <param name="valor">Valor a setear.</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetTipo(MySqlConnector.MySqlDbType)">
+            <summary>
+            Método que setea un el tipo de dato al Parametro.
+            </summary>
+            <param name="tipo">Tipo a setear.</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetTipoDecimal(System.Byte,System.Byte)">
+            <summary>
+            Método que setea el tipo Decimal al Parametro.
+            </summary>
+            <param name="precision">Cantidad de dígitos en total.</param>
+            <param name="escala">Cantidad de dígitos detrás de la coma.</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetTipoVarchar(System.Int32)">
+            <summary>
+            Método que setea el tipo VARCHAR(n) al Parametro.
+            </summary>
+            <param name="longitud">Cantidad de caracteres máximos</param>
+            <returns>BuilderParametro para encadenar con otros métodos.</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetTipoChar(System.Int32)">
+            <summary>
+            Método que setea el tipo CHAR(n) al Parametro.
+            </summary>
+            <param name="longitud">Cantidad de caracteres de longitud fija.</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.BuilderParametro.SetLongitud(System.Int32)">
+            <summary>
+            Método que setea la longitud al Parametro.
+            </summary>
+            <param name="longitud">Longitud del parametro</param>
+            <returns>BuilderParametro para encadenar con otros métodos</returns>
+        </member>
+        <member name="T:et12.edu.ar.AGBD.Mapeadores.Mapeador`1">
+            <summary>
+            Clase abstracta y genérica para facilitar las configuraciones del mapeo de clases
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.BP">
+            <summary>
+            Instancia de BuilderParametro del mapeador.
+            </summary>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.Tabla">
+            <summary>
+            Nombre de la tabla asociada a la Clase
+            </summary>
+        </member>
+        <member name="P:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.TuplaAtributosInsert">
+            <summary>
+            Cadena que representa la tupa de atributos, formato (atr1, atr2, ... , atrN)
+            </summary>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.SetComandoSP(MySqlConnector.MySqlCommand,System.String)">
+            <summary>
+            Método estatico para setear un comando
+            </summary>
+            <param name="comando">Comando al que hay que asignar</param>
+            <param name="nombre">Nombre del Stored Procedure/Function</param>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.SetComandoPara(MySqlConnector.MySqlCommand,System.Action{`0},`0)">
+            <summary>
+            Método para asignar a comando, en base a una acción de seteo 
+            </summary>
+            <param name="comando"></param>
+            <param name="accionSeteo"></param>
+            <param name="elemento"></param>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.ColeccionDesdeTabla(System.Data.DataTable)">
+            <summary>
+            Método que en base a <c>T</c>, mapea la tabla a una colección.
+            </summary>
+            <param name="tabla">Tabla a recorrer.</param>
+            <returns>Lista del tipo <c>T</c>.</returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.ObjetoDesdeFila(System.Data.DataRow)">
+            <summary>
+            Método que en base a una fila, devuelve una instancia de <c>T</c>.
+            </summary>
+            <param name="fila">fila </param>
+            <returns></returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.Insert(System.Collections.Generic.List{`0})">
+            <summary>
+            Método que genera una cadena para hacer INSERTS de la colección de <c>T</c>.
+            </summary>
+            <param name="lista">Lista de <c>T</c> para generar el INSERT</param>
+            <returns></returns>
+        </member>
+        <member name="M:et12.edu.ar.AGBD.Mapeadores.Mapeador`1.TuplaValor(`0)">
+            <summary>
+            Método que en base a <c>T</c>, genera una tupla de valores.
+            </summary>
+            <param name="t">Objeto del tipo <c>T</c> que se pretende parsear.</param>
+            <returns>Cadena de la tupla de valores SIN los parentesis.</returns>
+        </member>
+    </members>
+</doc>

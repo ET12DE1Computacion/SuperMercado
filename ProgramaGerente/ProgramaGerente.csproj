@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="AGBD">
+      <HintPath>..\lib\AGBD.dll</HintPath>
+    </Reference>
     <Reference Include="BiblioMenu">
       <HintPath>..\lib\BiblioMenu.dll</HintPath>
     </Reference>
