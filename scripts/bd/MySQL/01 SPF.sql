@@ -61,3 +61,27 @@ BEGIN
     FROM    HistorialPrecio
     WHERE   idProducto = unIdProducto;
 END $$
+
+-- Este SP ingresa elementos en la tabla Item en caso de que no existan filas o actualiza su valor si existe
+DROP PROCEDURE IF EXISTS ingresoItem $$
+CREATE PROCEDURE ingresoItem (unIdProducto SMALLINT, unIdTicket int, unaCantidad INT)
+BEGIN
+    -- Voy a evaluar si ya hay un item
+    IF  (EXISTS (SELECT *
+                FROM    Item
+                WHERE   idTicket = unidTicket
+                AND     idProducto = unIdProducto)) THEN
+        -- Si llegue hasta aca es porque tengo fila y tengo que actualizar
+        UPDATE  Item
+        SET     cantidad = cantidad + unaCantidad
+        WHERE   idTicket = unidTicket
+        AND     idProducto = unIdProducto;
+    ELSE
+        -- Si llegue aca, es que no existe el item y tengo que completar su precio
+        INSERT INTO Item (idProducto, idTicket, precioUnitario, cantidad)
+                SELECT  unIdProducto, unIdTicket, precioUnitario, unaCantidad
+                FROM    Producto
+                WHERE   idProducto = unIdProducto
+                LIMIT   1;
+    END IF;
+END $$
