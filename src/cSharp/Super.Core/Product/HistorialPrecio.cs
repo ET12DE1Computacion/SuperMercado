@@ -2,10 +2,10 @@ namespace Super.Core.Product;
 public class HistorialPrecio : PosesionProducto
 {
     // Como el precio no se cambia, lo colocamos como init.
-    public decimal Precio { get; init; }
+    public decimal PrecioUnitario { get; init; }
     public HistorialPrecio(Producto producto)
         : base(producto.IdProducto)
-        => Precio = producto.PrecioUnitario;
+        => PrecioUnitario = producto.PrecioUnitario;
     public HistorialPrecio()
     {
         

@@ -40,7 +40,7 @@ public class AdoDapper : IAdo
 
     public void AltaCategoria(Categoria categoria)
     {
-        //Preparo los parametros
+        //Preparo los parametros del Stored Procedure
         var parametros = new DynamicParameters();
         parametros.Add("@unIdRubro", direction: ParameterDirection.Output);
         parametros.Add("@unRubro", categoria.Nombre);

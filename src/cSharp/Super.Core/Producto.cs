@@ -7,7 +7,7 @@ public class Producto
     public required string Nombre { get; set; }
     public decimal PrecioUnitario { get; private set; }
     // El set de Stock deberia ser privado, pero por dapper lo necesito colocar el publico
-    public ushort Stock { get; set; }
+    public ushort Cantidad { get; set; }
     public List<IngresoStock> Ingresos { get; set; }
     public List<HistorialPrecio> Precios { get; set; }
     public required Categoria Categoria { get; set; }
