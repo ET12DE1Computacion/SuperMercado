@@ -18,6 +18,7 @@ CREATE USER IF NOT EXISTS 'gerenteSuper'@'localhost' IDENTIFIED BY 'passGerente'
 GRANT SELECT, INSERT on Supermercado.Rubro to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT, UPDATE(nombre, cantidad, precioUnitario) on Supermercado.Producto to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT on Supermercado.HistorialPrecio to 'gerenteSuper'@'localhost';
+GRANT SELECT, INSERT on Supermercado.IngresoStock to 'gerenteSuper'@'localhost';
 GRANT SELECT, INSERT on Supermercado.Cajero TO 'gerenteSuper'@'localhost';
 GRANT EXECUTE ON PROCEDURE altaRubro TO 'gerenteSuper'@'localhost';
 GRANT EXECUTE ON PROCEDURE altaProducto TO 'gerenteSuper'@'localhost';

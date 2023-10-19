@@ -4,6 +4,10 @@ public class HistorialPrecio : PosesionProducto
     // Como el precio no se cambia, lo colocamos como init.
     public decimal Precio { get; init; }
     public HistorialPrecio(Producto producto)
-        : base(producto.Id)
+        : base(producto.IdProducto)
         => Precio = producto.PrecioUnitario;
+    public HistorialPrecio()
+    {
+        
+    }
 }

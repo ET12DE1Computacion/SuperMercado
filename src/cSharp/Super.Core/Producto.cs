@@ -3,7 +3,7 @@ using Super.Core.Product;
 namespace Super.Core;
 public class Producto
 {
-    public short Id { get; set; }
+    public short IdProducto { get; set; }
     public required string Nombre { get; set; }
     public decimal PrecioUnitario { get; private set; }
     // El set de Stock deberia ser privado, pero por dapper lo necesito colocar el publico
@@ -11,6 +11,13 @@ public class Producto
     public List<IngresoStock> Ingresos { get; set; }
     public List<HistorialPrecio> Precios { get; set; }
     public required Categoria Categoria { get; set; }
+    
+    // Constructor agregado para dapper
+    public Producto()
+    {
+        Ingresos = new();
+        Precios = new();
+    }
     public Producto(Categoria categoria, string nombre, decimal precio)
     {
         Nombre = nombre;

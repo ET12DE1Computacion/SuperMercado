@@ -12,7 +12,7 @@ public class Ticket
     public void AgregarItem(Producto producto, byte cantidad)
     {
         //Me fijo si el producto ya existe en la lista de items
-        var item = Items.Find(i => i.Producto.Id == producto.Id);
+        var item = Items.Find(i => i.Producto.IdProducto == producto.IdProducto);
         
         if (item is not null)
             item.IncrementarCantidad(cantidad);

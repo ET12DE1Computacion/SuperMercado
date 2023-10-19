@@ -3,12 +3,12 @@ using Super.Dapper;
 
 namespace Super.Test;
 
-public class TestAdoDapper
+public class TestAdoCategoria
 {
     private readonly IAdo _ado;
-    public TestAdoDapper()
+    public TestAdoCategoria()
     {
-        var cadena = "Server=localhost;Database=Supermercado;Uid=gerenteSuper;pwd=passGerente";
+        var cadena = "Server=localhost;Database=Supermercado;Uid=gerenteSuper;pwd=passGerente;Allow User Variables=True";
         _ado = new AdoDapper(cadena);
     }
     [Fact]

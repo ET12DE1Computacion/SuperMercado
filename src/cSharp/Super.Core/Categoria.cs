@@ -2,6 +2,6 @@
 
 public class Categoria
 {
-    public byte Id { get; set; }
+    public byte IdCategoria { get; set; }
     public required string Nombre { get; set; }
 }
