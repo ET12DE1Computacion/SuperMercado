@@ -53,7 +53,17 @@ public class AdoDapper : IAdo
 
     public void AltaProducto(Producto producto)
     {
-        throw new NotImplementedException();
+        var parametros = new DynamicParameters();
+        parametros.Add("@unIdProducto", direction: ParameterDirection.Output);
+        parametros.Add("@unIdRubro", producto.Categoria.IdCategoria);
+        parametros.Add("@unNombre", producto.Nombre);
+        parametros.Add("@unPrecioUnitario", producto.PrecioUnitario);
+        parametros.Add("@unaCantidad", producto.Cantidad);
+
+        _conexion.Execute("altaProducto", parametros);
+
+        //Obtengo el valor de parametro de tipo salida
+        producto.IdProducto = parametros.Get<short>("@unIdProducto");
     }
 
     public List<Categoria> ObtenerCategorias()

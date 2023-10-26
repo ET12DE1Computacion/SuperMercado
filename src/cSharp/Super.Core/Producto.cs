@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Super.Core.Product;
 
 namespace Super.Core;
@@ -18,13 +19,15 @@ public class Producto
         Ingresos = new();
         Precios = new();
     }
-    public Producto(Categoria categoria, string nombre, decimal precio)
+    [SetsRequiredMembers]
+    public Producto(Categoria categoria, string nombre, decimal precio, ushort cantidad)
     {
         Nombre = nombre;
         PrecioUnitario = precio;
         Ingresos = new List<IngresoStock>();
         Precios = new List<HistorialPrecio>();
         Categoria = categoria;
+        Cantidad = cantidad;
     }
     public void CambiarPrecio(decimal precio)
     {
