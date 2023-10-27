@@ -7,4 +7,6 @@ public interface IAdo
     void AltaProducto(Producto producto);
     List<Producto> ObtenerProductos();
     Producto? ObtenerProducto(short id);
+    void AltaCajero(Cajero cajero);
+    Cajero? CajeroPorPass(uint dni, string pass);
 }

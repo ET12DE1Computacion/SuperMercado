@@ -27,7 +27,7 @@ START TRANSACTION;
 	SET @dniPepe = 100;
 	SET @dniMoni = 90;
 	INSERT INTO Cajero	(dni, nombre, apellido, pass)
-		VALUES			(@dniPepe, 'Pepe', 'Argentino', 'zapatos'),
+		VALUES			(@dniPepe, 'Pepe', 'Argento', 'zapatos'),
 						(@dniMoni, 'Moni', 'Argento', 'cafecito');
 	
 	CALL altaTicket(@idTicket1, @dniPepe, now());

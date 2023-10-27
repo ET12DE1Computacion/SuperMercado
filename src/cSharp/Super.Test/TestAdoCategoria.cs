@@ -1,20 +1,10 @@
-using Super.Core;
-using Super.Dapper;
-
 namespace Super.Test;
-
-public class TestAdoCategoria
+public class TestAdoCategoria : TestAdo
 {
-    private readonly IAdo _ado;
-    public TestAdoCategoria()
-    {
-        var cadena = "Server=localhost;Database=Supermercado;Uid=gerenteSuper;pwd=passGerente;Allow User Variables=True";
-        _ado = new AdoDapper(cadena);
-    }
     [Fact]
     public void TraerCategorias()
     {
-        var categorias = _ado.ObtenerCategorias();
+        var categorias = Ado.ObtenerCategorias();
 
         Assert.NotEmpty(categorias);
         //Pregunto por rubros que se dan de alta en "scripts/bd/MySQL/03 Inserts.sql"

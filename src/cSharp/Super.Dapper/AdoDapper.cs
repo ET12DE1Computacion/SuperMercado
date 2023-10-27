@@ -8,13 +8,13 @@ namespace Super.Dapper;
 public class AdoDapper : IAdo
 {
     private readonly IDbConnection _conexion;
-    private readonly string _queryCategorias
+    private static readonly string _queryCategorias
         = "SELECT idRubro AS idCategoria, rubro AS nombre FROM Rubro";
-    private readonly string _queryProductos
+    private static readonly string _queryProductos
         = @"SELECT  idProducto, nombre, precioUnitario, cantidad, Producto.idRubro AS idCategoria, rubro AS nombre
             FROM    Producto
             JOIN    Rubro USING (idRubro)";
-    private readonly string _queryProducto
+    private static readonly string _queryProducto
         //TODO fijarse que mapee bien todos los atributos
         = @"SELECT  *
             FROM    Producto
@@ -32,11 +32,22 @@ public class AdoDapper : IAdo
             SELECT  *
             FROM    IngresoStock
             WHERE   idProducto = @id;";
+    private static readonly string _queryCajeroPass
+        = @"SELECT  *
+            FROM    Cajero
+            WHERE   dni = @unDni
+            AND     pass = SHA2(@unaPass, 256)
+            LIMIT   1";
 
     public AdoDapper(IDbConnection conexion) => this._conexion = conexion;
 
     //Este constructor usa por defecto la cadena para un conector MySQL
     public AdoDapper(string cadena) => _conexion = new MySqlConnection(cadena);
+
+    public void AltaCajero(Cajero cajero)
+    {
+        throw new NotImplementedException();
+    }
 
     public void AltaCategoria(Categoria categoria)
     {
@@ -66,12 +77,16 @@ public class AdoDapper : IAdo
         producto.IdProducto = parametros.Get<short>("@unIdProducto");
     }
 
+    public Cajero? CajeroPorPass(uint dni, string pass)
+    //En caso de que exista un cajero, lo devuelve instanciado, caso contrario devuelve NULL.
+        => _conexion.QueryFirstOrDefault<Cajero>(_queryCajeroPass, new { unDni = dni, unaPass = pass });
+
     public List<Categoria> ObtenerCategorias()
         => _conexion.Query<Categoria>(_queryCategorias).ToList();
 
     public Producto? ObtenerProducto(short idProducto)
     {
-        using (var multi = _conexion.QueryMultiple(_queryProducto, new {id = idProducto}))
+        using (var multi = _conexion.QueryMultiple(_queryProducto, new { id = idProducto }))
         {
             var producto = multi.ReadSingleOrDefault<Producto>();
             if (producto is not null)
