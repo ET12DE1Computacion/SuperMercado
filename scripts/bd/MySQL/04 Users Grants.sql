@@ -30,7 +30,8 @@ GRANT SELECT on Supermercado.Producto to 'cajero'@'10.120.0.%';
 GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'10.120.0.%'; 
 GRANT SELECT, INSERT, UPDATE ON Supermercado.Ticket to 'cajero'@'10.120.0.%';
 GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@'10.120.0.%';
-GRANT EXECUTE ON PROCEDURE cajeroPorDniPass TO 'cajero'@'localhost';
+GRANT EXECUTE ON PROCEDURE cajeroPorDniPass TO 'cajero'@'10.120.0.%';
+GRANT EXECUTE ON PROCEDURE ingresoItem TO 'cajero'@'10.120.0.%';
 
 # Grants cajero pruebas locales
 GRANT SELECT ON Supermercado.Cajero to 'cajero'@'localhost';
@@ -40,3 +41,4 @@ GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'localhost';
 GRANT SELECT, INSERT ON Supermercado.Ticket to 'cajero'@'localhost';
 GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@'localhost';
 GRANT EXECUTE ON PROCEDURE cajeroPorDniPass TO 'cajero'@'localhost';
+GRANT EXECUTE ON PROCEDURE ingresoItem TO 'cajero'@'localhost';

@@ -22,7 +22,7 @@ START TRANSACTION;
 	CALL altaProducto(@idManaos, @idGaseosa, 'Manaos Cola 2.25L.', @precioManaos, 1000);
 	
 	SET @precioCoca = 137.25;
-	CALL altaProducto(@idCocaCola, @idGaseosa, 'Coca Cola 2.25L.', @precioCoca, 750);
+	CALL altaProducto(@idCocaCola, @idGaseosa, 'Coca Cola 2.25L.', @precioCoca, 150);
 
 	SET @dniPepe = 100;
 	SET @dniMoni = 90;

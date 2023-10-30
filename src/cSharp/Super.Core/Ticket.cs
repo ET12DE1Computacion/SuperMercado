@@ -4,6 +4,7 @@ public class Ticket
     public int Id { get; set; }
     public DateTime FechaHora { get; set; }
     public List<Item> Items { get; set; }
+    public required Cajero Cajero { get; set; }
     public Ticket()
     {
         FechaHora = DateTime.Now;
