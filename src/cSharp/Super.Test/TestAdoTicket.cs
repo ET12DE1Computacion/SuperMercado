@@ -47,7 +47,9 @@ public class TestAdoTicket : TestAdo
         //Cargo el ticket con items cuyo stock no alcanza
         produtos.ForEach(p => ticket.AgregarItem(p, 200));
 
-        Ado.AltaTicket(ticket);
-        Assert.NotEqual(0, ticket.Id);
+        /*Aseguro que la operacion Ado.AltaTicket(ticket), va a devolver una
+        excepción del tipo InvalidOperationException*/
+        var excep = Assert.Throws<InvalidOperationException>(() => Ado.AltaTicket(ticket));
+        Assert.StartsWith("No alcanza stock", excep.Message);
     }
 }

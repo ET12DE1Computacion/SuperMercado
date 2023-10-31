@@ -66,6 +66,7 @@ END $$
 DROP PROCEDURE IF EXISTS ingresoItem $$
 CREATE PROCEDURE ingresoItem (unIdProducto SMALLINT, unIdTicket int, unaCantidad INT)
 BEGIN
+    DECLARE precio DECIMAL(7,2);
     -- Voy a evaluar si ya hay un item
     IF  (EXISTS (SELECT *
                 FROM    Item
@@ -77,11 +78,10 @@ BEGIN
         WHERE   idTicket = unidTicket
         AND     idProducto = unIdProducto;
     ELSE
+        SELECT  precioUnitario into precio
+        FROM    Producto WHERE idProducto = unIdProducto;
         -- Si llegue aca, es que no existe el item y tengo que completar su precio
-        INSERT INTO Item (idProducto, idTicket, precioUnitario, cantidad)
-                SELECT  unIdProducto, unIdTicket, precioUnitario, unaCantidad
-                FROM    Producto
-                WHERE   idProducto = unIdProducto
-                LIMIT   1;
+        INSERT INTO Item    (idProducto, idTicket, precioUnitario, cantidad)
+            VALUES          (unIdProducto, unIdTicket, precio, unaCantidad);
     END IF;
 END $$

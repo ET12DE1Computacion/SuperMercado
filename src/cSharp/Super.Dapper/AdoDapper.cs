@@ -174,11 +174,11 @@ public class AdoDapper : IAdo
 
                 ticket.Items.ForEach(i => i.IdTicket = ticket.Id);
             }
-            catch (System.Exception e)
+            catch (MySqlException e)
             {
                 //Si hubo algun problema, doy marcha atras con los posibles cambios
                 transaccion.Rollback();
-                throw;
+                throw new InvalidOperationException(e.Message, e);
             }
         }
     }
