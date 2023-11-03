@@ -145,6 +145,11 @@ public class AdoDapper : IAdo
 
     #endregion
     #region Ticket
+    private static readonly string _queryTicket
+        = @"SELECT  idTiket, fechaHora, C.dni, nombre, apellido
+            FROM    Ticket
+            JOIN    Cajero USING (dni)
+            WHERE   idTicket = @id";
     public void AltaTicket(Ticket ticket)
     {
         //Parametros para el ticket
@@ -181,6 +186,37 @@ public class AdoDapper : IAdo
                 throw new InvalidOperationException(e.Message, e);
             }
         }
+    }
+    public Ticket? ObtenerTicket(int idTicket)
+    {
+        var ticket = _conexion.Query<Ticket, Cajero, Ticket>
+            (_queryTicket,
+            (ticket, cajero) =>
+                {
+                    ticket.Cajero = cajero;
+                    return ticket;
+                },
+            new { id = idTicket },
+            splitOn: "dni").
+            FirstOrDefault();
+
+        if (ticket is null)
+            return null;
+
+        ticket.Items = _conexion.Query<Item, Producto, Categoria, Item>
+            ("DetalleTicket",
+            (item, producto, categoria) =>
+                {
+                    producto.Categoria = categoria;
+                    item.Producto = producto;
+                    return item;
+                },
+            new { unIdTicket = idTicket },
+            splitOn: "idProducto, idRubro",
+            commandType: CommandType.StoredProcedure).
+            ToList();
+        
+        return ticket;
     }
     #endregion
 }

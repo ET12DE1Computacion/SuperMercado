@@ -85,3 +85,15 @@ BEGIN
             VALUES          (unIdProducto, unIdTicket, precio, unaCantidad);
     END IF;
 END $$
+
+DROP PROCEDURE IF EXISTS DetalleTicket $$
+CREATE PROCEDURE DetalleTicket (unIdTicket INT)
+BEGIN
+    SELECT  I.cantidad, I.precioUnitario,
+            P.idProducto, nombre,
+            R.idRubro as idCategoria, rubro as nombre
+    FROM    Item I
+    JOIN    Producto P  USING (idProducto)
+    JOIN    Rubro R USING (idRubro)
+    WHERE   idTicket = unIdTicket;
+END $$

@@ -10,4 +10,5 @@ public interface IAdo
     void AltaCajero(Cajero cajero, string pass);
     Cajero? CajeroPorPass(uint dni, string pass);
     void AltaTicket (Ticket ticket);
+    Ticket? ObtenerTicket(int id);
 }
