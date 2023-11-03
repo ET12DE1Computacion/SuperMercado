@@ -52,4 +52,20 @@ public class TestAdoTicket : TestAdo
         var excep = Assert.Throws<InvalidOperationException>(() => Ado.AltaTicket(ticket));
         Assert.StartsWith("No alcanza stock", excep.Message);
     }
+    [Fact]
+    public void DetalleTicketOK()
+    {
+        var ticket = Ado.ObtenerTicket(1);
+
+        Assert.NotNull(ticket);
+        Assert.NotEmpty(ticket.Items);
+        Assert.Contains(ticket.Items, i => i.Cantidad == 2 && i.PrecioUnitario == 65.15M);
+    }
+    [Fact]
+    public void DetalleTicketFalla()
+    {
+        var ticket = Ado.ObtenerTicket(0);
+
+        Assert.Null(ticket);
+    }
 }

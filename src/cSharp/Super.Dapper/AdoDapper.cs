@@ -146,9 +146,9 @@ public class AdoDapper : IAdo
     #endregion
     #region Ticket
     private static readonly string _queryTicket
-        = @"SELECT  idTiket, fechaHora, C.dni, nombre, apellido
+        = @"SELECT  idTicket, fechaHora, C.dni, nombre, apellido
             FROM    Ticket
-            JOIN    Cajero USING (dni)
+            JOIN    Cajero C USING (dni)
             WHERE   idTicket = @id";
     public void AltaTicket(Ticket ticket)
     {
@@ -202,17 +202,18 @@ public class AdoDapper : IAdo
 
         if (ticket is null)
             return null;
-
+        ticket.Id = idTicket;
         ticket.Items = _conexion.Query<Item, Producto, Categoria, Item>
             ("DetalleTicket",
             (item, producto, categoria) =>
                 {
                     producto.Categoria = categoria;
                     item.Producto = producto;
+                    item.IdTicket = idTicket;
                     return item;
                 },
             new { unIdTicket = idTicket },
-            splitOn: "idProducto, idRubro",
+            splitOn: "idProducto, idCategoria",
             commandType: CommandType.StoredProcedure).
             ToList();
         

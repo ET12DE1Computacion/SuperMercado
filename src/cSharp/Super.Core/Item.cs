@@ -16,6 +16,13 @@ public class Item
         PrecioUnitario = producto.PrecioUnitario;
         Cantidad = cantidad;
     }
+    //Este constructor es necesario para Dapper
+    [SetsRequiredMembers]
+    public Item(byte cantidad, decimal precioUnitario)
+    {
+        Cantidad = cantidad;
+        PrecioUnitario = precioUnitario;
+    }
     public void IncrementarCantidad(byte cantidad)
         => Cantidad += cantidad;
 }
