@@ -53,10 +53,21 @@ public class AdoDapper : IAdo
         parametros.Add("@unIdRubro", direction: ParameterDirection.Output);
         parametros.Add("@unRubro", categoria.Nombre);
 
-        _conexion.Execute("altaRubro", parametros);
+        try
+        {
+            _conexion.Execute("altaRubro", parametros);
 
-        //Obtengo el valor de parametro de tipo salida
-        categoria.IdCategoria = parametros.Get<byte>("@unIdRubro");
+            //Obtengo el valor de parametro de tipo salida
+            categoria.IdCategoria = parametros.Get<byte>("@unIdRubro");
+        }
+        catch (MySqlException e)
+        {
+            if (e.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
+            {
+                throw new ConstraintException(categoria.Nombre + " ya se encuentra en uso.");
+            }
+            throw;
+        }
     }
 
     #endregion

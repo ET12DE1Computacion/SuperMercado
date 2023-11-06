@@ -6,6 +6,7 @@ public class TestAdoTicket : TestAdo
 {
     private static string _cadena =
         @"Server=localhost;Database=Supermercado;Uid=cajero;pwd=passCajero;Allow User Variables=True";
+    //Este test, va a usar la cadena de conexión que definí en la linea superior.
     public TestAdoTicket() : base(_cadena) { }
     [Fact]
     public void AltaTicketOK()
