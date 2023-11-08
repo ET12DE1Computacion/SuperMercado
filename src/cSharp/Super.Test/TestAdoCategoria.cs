@@ -27,6 +27,19 @@ public class TestAdoCategoria : TestAdo
 
         var excep = Assert.Throws<ConstraintException>(() => Ado.AltaCategoria(gaseosa));
         Assert.Contains("ya se encuentra en uso", excep.Message);
+    }
+    [Fact]
+    public void AltaCategoria()
+    {
+        var almacen = new Categoria()
+        {
+            Nombre = "Almacen"
+        };
 
+        Assert.Equal(0, almacen.IdCategoria);
+        
+        Ado.AltaCategoria(almacen);
+        
+        Assert.NotEqual(0, almacen.IdCategoria);
     }
 }
