@@ -7,6 +7,7 @@ using Super.Core.Product;
 namespace Super.Dapper;
 public class AdoDapper : IAdo
 {
+    //Defino una asociacion a un objeto que sabe conectarse a una BD.
     private readonly IDbConnection _conexion;
 
     public AdoDapper(IDbConnection conexion) => this._conexion = conexion;
@@ -178,7 +179,7 @@ public class AdoDapper : IAdo
                 _conexion.Execute("altaTicket", parametros, commandType: CommandType.StoredProcedure, transaction: transaccion);
                 ticket.Id = parametros.Get<int>("@unIdTicket");
 
-                //creo una lista con los valores que le vamos a pasar al SP
+                //creo una lista con los valores que le vamos a pasar al SP 
                 var paraItems = ticket.Items.
                     Select(i => new { unIdProducto = i.Producto.IdProducto, unIdTicket = ticket.Id, unaCantidad = i.Cantidad }).
                     ToList();
