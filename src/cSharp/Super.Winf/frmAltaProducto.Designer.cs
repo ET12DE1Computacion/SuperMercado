@@ -110,7 +110,7 @@
             btnCrear.UseVisualStyleBackColor = true;
             btnCrear.Click += btnCrear_Click;
             // 
-            // Form1
+            // frmAltaProducto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -123,8 +123,8 @@
             Controls.Add(txtNombre);
             Controls.Add(lblNombre);
             Controls.Add(lstCategorias);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "frmAltaProducto";
+            Text = "Alta Producto";
             Load += Carga;
             ((System.ComponentModel.ISupportInitialize)numPrecio).EndInit();
             ((System.ComponentModel.ISupportInitialize)numStock).EndInit();
