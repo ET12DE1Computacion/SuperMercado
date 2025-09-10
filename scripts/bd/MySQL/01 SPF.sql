@@ -1,5 +1,5 @@
 DELIMITER $$
-USE Supermercado $$
+USE 5to_Supermercado $$
 SELECT 'Creando Procedimientos y Funciones Almacenadas' AS 'Estado' $$
 
 DELIMITER $$

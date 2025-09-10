@@ -1,5 +1,5 @@
 DELIMITER ;
-USE Supermercado;
+USE 5to_Supermercado;
 SELECT 'Preparando para Inserts' AS 'Estado';
 SET FOREIGN_KEY_CHECKS=0;
 	TRUNCATE TABLE HistorialPrecio;

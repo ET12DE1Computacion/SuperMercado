@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS Supermercado;
-CREATE DATABASE Supermercado;
-USE Supermercado;
+DROP DATABASE IF EXISTS 5to_Supermercado;
+CREATE DATABASE 5to_Supermercado;
+USE 5to_Supermercado;
 SELECT 'Creando Tablas' AS 'Estado';
 
 CREATE TABLE Rubro(
