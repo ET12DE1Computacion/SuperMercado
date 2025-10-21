@@ -1,13 +1,17 @@
 using System.Data;
 using Super.Core;
+using Super.Core.Repos;
+using Super.Dapper;
 
 namespace Super.Test;
-public class TestAdoCategoria : TestAdo
+public class TestAdoCategoria : TestRepo
 {
+    private readonly IRepoProducto repoProducto;
+    public TestAdoCategoria() : base() => repoProducto = new RepoProducto(_conexion);
     [Fact]
     public void TraerCategorias()
     {
-        var categorias = Ado.ObtenerCategorias();
+        var categorias = repoProducto.ObtenerCategorias();
 
         Assert.NotEmpty(categorias);
         //Pregunto por rubros que se dan de alta en "scripts/bd/MySQL/03 Inserts.sql"
@@ -25,7 +29,7 @@ public class TestAdoCategoria : TestAdo
             Nombre = "Gaseosa"
         };
 
-        var excep = Assert.Throws<ConstraintException>(() => Ado.AltaCategoria(gaseosa));
+        var excep = Assert.Throws<ConstraintException>(() => repoProducto.AltaCategoria(gaseosa));
         Assert.Contains("ya se encuentra en uso", excep.Message);
     }
     [Fact]
@@ -38,7 +42,7 @@ public class TestAdoCategoria : TestAdo
 
         Assert.Equal(0, almacen.IdCategoria);
         
-        Ado.AltaCategoria(almacen);
+        repoProducto.AltaCategoria(almacen);
         
         Assert.NotEqual(0, almacen.IdCategoria);
     }

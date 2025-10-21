@@ -1,6 +1,6 @@
 ﻿namespace Super.Winf
 {
-    partial class frmAltaProducto
+    partial class FrmAltaProducto
     {
         /// <summary>
         ///  Required designer variable.

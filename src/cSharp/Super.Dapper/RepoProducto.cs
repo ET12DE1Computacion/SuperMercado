@@ -3,44 +3,15 @@ using Dapper;
 using MySqlConnector;
 using Super.Core;
 using Super.Core.Product;
+using Super.Core.Repos;
 
 namespace Super.Dapper;
-public class AdoDapper : IAdo
+public class RepoProducto : Repo, IRepoProducto
 {
     //Defino una asociacion a un objeto que sabe conectarse a una BD.
-    private readonly IDbConnection _conexion;
-
-    public AdoDapper(IDbConnection conexion) => this._conexion = conexion;
-
     //Este constructor usa por defecto la cadena para un conector MySQL
-    public AdoDapper(string cadena) => _conexion = new MySqlConnection(cadena);
+    public RepoProducto(IDbConnection conexion) : base(conexion) { }
 
-    #region Cajero
-
-    private static readonly string _queryCajeroPass
-        = @"SELECT  *
-            FROM    Cajero
-            WHERE   dni = @unDni
-            AND     pass = SHA2(@unaPass, 256)
-            LIMIT   1";
-    private static readonly string _queryAltaCajero
-        = @"INSERT INTO Cajero VALUES (@dni, @nombre, @apellido, @pass)";
-    public void AltaCajero(Cajero cajero, string pass)
-        => _conexion.Execute(
-                _queryAltaCajero,
-                new
-                {
-                    dni = cajero.Dni,
-                    nombre = cajero.Nombre,
-                    apellido = cajero.Apellido,
-                    pass = pass
-                }
-            );
-    public Cajero? CajeroPorPass(uint dni, string pass)
-    //En caso de que exista un cajero, lo devuelve instanciado, caso contrario devuelve NULL.
-        => _conexion.QueryFirstOrDefault<Cajero>(_queryCajeroPass, new { unDni = dni, unaPass = pass });
-
-    #endregion
     #region Categoria
 
     private static readonly string _queryCategorias
@@ -157,79 +128,6 @@ public class AdoDapper : IAdo
 
     #endregion
     #region Ticket
-    private static readonly string _queryTicket
-        = @"SELECT  idTicket, fechaHora, C.dni, nombre, apellido
-            FROM    Ticket
-            JOIN    Cajero C USING (dni)
-            WHERE   idTicket = @id";
-    public void AltaTicket(Ticket ticket)
-    {
-        //Parametros para el ticket
-        var parametros = new DynamicParameters();
-        parametros.Add("@unIdTicket", direction: ParameterDirection.Output);
-        parametros.Add("@unDni", ticket.Cajero.Dni);
-        parametros.Add("@unaFechaHora", ticket.FechaHora);
-
-        //Abro la conexion
-        _conexion.Open();
-        using (var transaccion = _conexion.BeginTransaction())
-        {
-            try
-            {
-                _conexion.Execute("altaTicket", parametros, commandType: CommandType.StoredProcedure, transaction: transaccion);
-                ticket.Id = parametros.Get<int>("@unIdTicket");
-
-                //creo una lista con los valores que le vamos a pasar al SP 
-                var paraItems = ticket.Items.
-                    Select(i => new { unIdProducto = i.Producto.IdProducto, unIdTicket = ticket.Id, unaCantidad = i.Cantidad }).
-                    ToList();
-
-                _conexion.Execute("ingresoItem", paraItems, commandType: CommandType.StoredProcedure, transaction: transaccion);
-
-                //Como todo se ejecuto ok, confirmo los cambios
-                transaccion.Commit();
-
-                ticket.Items.ForEach(i => i.IdTicket = ticket.Id);
-            }
-            catch (MySqlException e)
-            {
-                //Si hubo algun problema, doy marcha atras con los posibles cambios
-                transaccion.Rollback();
-                throw new InvalidOperationException(e.Message, e);
-            }
-        }
-    }
-    public Ticket? ObtenerTicket(int idTicket)
-    {
-        var ticket = _conexion.Query<Ticket, Cajero, Ticket>
-            (_queryTicket,
-            (ticket, cajero) =>
-                {
-                    ticket.Cajero = cajero;
-                    return ticket;
-                },
-            new { id = idTicket },
-            splitOn: "dni").
-            FirstOrDefault();
-
-        if (ticket is null)
-            return null;
-        ticket.Id = idTicket;
-        ticket.Items = _conexion.Query<Item, Producto, Categoria, Item>
-            ("DetalleTicket",
-            (item, producto, categoria) =>
-                {
-                    producto.Categoria = categoria;
-                    item.Producto = producto;
-                    item.IdTicket = idTicket;
-                    return item;
-                },
-            new { unIdTicket = idTicket },
-            splitOn: "idProducto, idCategoria",
-            commandType: CommandType.StoredProcedure).
-            ToList();
-        
-        return ticket;
-    }
+    
     #endregion
 }

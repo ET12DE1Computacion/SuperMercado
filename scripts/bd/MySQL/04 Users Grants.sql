@@ -15,31 +15,31 @@ DROP USER IF EXISTS 'gerenteSuper'@'localhost';
 CREATE USER IF NOT EXISTS 'gerenteSuper'@'localhost' IDENTIFIED BY 'passGerente';
 
 # Grants gerenteSuper
-GRANT SELECT, INSERT on Supermercado.Rubro to 'gerenteSuper'@'localhost';
-GRANT SELECT, INSERT, UPDATE(nombre, cantidad, precioUnitario) on Supermercado.Producto to 'gerenteSuper'@'localhost';
-GRANT SELECT, INSERT on Supermercado.HistorialPrecio to 'gerenteSuper'@'localhost';
-GRANT SELECT, INSERT on Supermercado.IngresoStock to 'gerenteSuper'@'localhost';
-GRANT SELECT, INSERT on Supermercado.Cajero TO 'gerenteSuper'@'localhost';
+GRANT SELECT, INSERT on 5to_Supermercado.Rubro to 'gerenteSuper'@'localhost';
+GRANT SELECT, INSERT, UPDATE(nombre, cantidad, precioUnitario) on 5to_Supermercado.Producto to 'gerenteSuper'@'localhost';
+GRANT SELECT, INSERT on 5to_Supermercado.HistorialPrecio to 'gerenteSuper'@'localhost';
+GRANT SELECT, INSERT on 5to_Supermercado.IngresoStock to 'gerenteSuper'@'localhost';
+GRANT SELECT, INSERT on 5to_Supermercado.Cajero TO 'gerenteSuper'@'localhost';
 GRANT EXECUTE ON PROCEDURE altaRubro TO 'gerenteSuper'@'localhost';
 GRANT EXECUTE ON PROCEDURE altaProducto TO 'gerenteSuper'@'localhost';
 
 # Grants cajero
-GRANT SELECT on Supermercado.Cajero to 'cajero'@'10.120.0.%';
-GRANT SELECT ON Supermercado.Rubro to 'cajero'@'10.120.0.%';
-GRANT SELECT on Supermercado.Producto to 'cajero'@'10.120.0.%'; 
-GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'10.120.0.%'; 
-GRANT SELECT, INSERT, UPDATE ON Supermercado.Ticket to 'cajero'@'10.120.0.%';
+GRANT SELECT on 5to_Supermercado.Cajero to 'cajero'@'10.120.0.%';
+GRANT SELECT ON 5to_Supermercado.Rubro to 'cajero'@'10.120.0.%';
+GRANT SELECT on 5to_Supermercado.Producto to 'cajero'@'10.120.0.%'; 
+GRANT SELECT, INSERT ON 5to_Supermercado.Item to 'cajero'@'10.120.0.%'; 
+GRANT SELECT, INSERT, UPDATE ON 5to_Supermercado.Ticket to 'cajero'@'10.120.0.%';
 GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@'10.120.0.%';
 GRANT EXECUTE ON PROCEDURE cajeroPorDniPass TO 'cajero'@'10.120.0.%';
 GRANT EXECUTE ON PROCEDURE ingresoItem TO 'cajero'@'10.120.0.%';
 GRANT EXECUTE ON PROCEDURE detalleTicket TO 'cajero'@'10.120.0.%';
 
 # Grants cajero pruebas locales
-GRANT SELECT ON Supermercado.Cajero to 'cajero'@'localhost';
-GRANT SELECT ON Supermercado.Rubro to 'cajero'@'localhost';
-GRANT SELECT on Supermercado.Producto to 'cajero'@'localhost';
-GRANT SELECT, INSERT ON Supermercado.Item to 'cajero'@'localhost';
-GRANT SELECT, INSERT ON Supermercado.Ticket to 'cajero'@'localhost';
+GRANT SELECT ON 5to_Supermercado.Cajero to 'cajero'@'localhost';
+GRANT SELECT ON 5to_Supermercado.Rubro to 'cajero'@'localhost';
+GRANT SELECT on 5to_Supermercado.Producto to 'cajero'@'localhost';
+GRANT SELECT, INSERT ON 5to_Supermercado.Item to 'cajero'@'localhost';
+GRANT SELECT, INSERT ON 5to_Supermercado.Ticket to 'cajero'@'localhost';
 GRANT EXECUTE ON PROCEDURE altaTicket TO 'cajero'@'localhost';
 GRANT EXECUTE ON PROCEDURE cajeroPorDniPass TO 'cajero'@'localhost';
 GRANT EXECUTE ON PROCEDURE ingresoItem TO 'cajero'@'localhost';

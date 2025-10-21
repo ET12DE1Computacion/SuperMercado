@@ -1,5 +1,5 @@
 DELIMITER $$
-USE Supermercado $$
+USE 5to_Supermercado $$
 SELECT 'Creando Triggers' AS 'Estado' $$
 
 DROP TRIGGER IF EXISTS aftInsProducto $$

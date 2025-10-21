@@ -1,14 +1,21 @@
 using Super.Core;
+using Super.Core.Repos;
+using Super.Dapper;
 
 namespace Super.Test;
-public class TestAdoCajero : TestAdo
+public class TestAdoCajero : TestRepo
 {
+    //Repo que vamos a usar en este test
+    readonly IRepoCajero repoCajero;
+    //Este test, va a usar la cadena de conexión que definí en la clase base TestRepo para instanciar RepoCajero.
+    public TestAdoCajero() : base()
+        => repoCajero = new RepoCajero(_conexion);
     [Theory]
     [InlineData(100,"Pepe", "zapatos")]
     [InlineData(90,"Moni", "cafecito")]
     public void TraerCajero(uint dni, string nombre, string pass)
     {
-        var cajero = Ado.CajeroPorPass(dni, pass);
+        var cajero = repoCajero.CajeroPorPass(dni, pass);
 
         Assert.NotNull(cajero);
         Assert.Equal(nombre, cajero.Nombre);
@@ -20,7 +27,7 @@ public class TestAdoCajero : TestAdo
     [InlineData(11, "yoTampoco")]
     public void CajerosNoExisten(uint dni, string pass)
     {
-        var cajero = Ado.CajeroPorPass(dni, pass);
+        var cajero = repoCajero.CajeroPorPass(dni, pass);
 
         Assert.Null(cajero);
     }
@@ -32,7 +39,7 @@ public class TestAdoCajero : TestAdo
         string nombre = "Nuevo";
         string apellido = "Gonzales";
 
-        var cajero = Ado.CajeroPorPass(dni, pass);
+        var cajero = repoCajero.CajeroPorPass(dni, pass);
 
         Assert.Null(cajero);
 
@@ -43,9 +50,9 @@ public class TestAdoCajero : TestAdo
             Apellido = apellido
         };
 
-        Ado.AltaCajero(nuevoGonzales, pass);
+        repoCajero.AltaCajero(nuevoGonzales, pass);
 
-        var mismoCajero = Ado.CajeroPorPass(dni, pass);
+        var mismoCajero = repoCajero.CajeroPorPass(dni, pass);
         
         Assert.NotNull(mismoCajero);
         Assert.Equal(nombre, mismoCajero.Nombre);

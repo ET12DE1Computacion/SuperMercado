@@ -1,20 +1,32 @@
 using Super.Core;
+using Super.Core.Repos;
+using Super.Dapper;
 
 namespace Super.Test;
-
-public class TestAdoTicket : TestAdo
+public class TestRepoTicket : TestRepo
 {
     private static string _cadena =
-        @"Server=localhost;Database=Supermercado;Uid=cajero;pwd=passCajero;Allow User Variables=True";
+        @"Server=localhost;Database=5to_Supermercado;Uid=cajero;pwd=passCajero;Allow User Variables=True";
+    readonly IRepoCajero repoCajero;
+    readonly IRepoProducto repoProducto;
+
     //Este test, va a usar la cadena de conexión que definí en la linea superior.
-    public TestAdoTicket() : base(_cadena) { }
+    readonly IRepoTicket repoTicket;
+    public TestRepoTicket() : base(_cadena)
+    {
+        //var conexionTicket = new MySqlConnection(_cadena);
+        repoTicket = new RepoTicket(_conexion);
+        repoCajero = new RepoCajero(_conexion);
+        repoProducto = new RepoProducto(_conexion);
+    }
+
     [Fact]
     public void AltaTicketOK()
     {
-        var pepe = Ado.CajeroPorPass(100, "zapatos");
+        var pepe = repoCajero.CajeroPorPass(100, "zapatos");
         Assert.NotNull(pepe);
 
-        var produtos = Ado.ObtenerProductos();
+        var produtos = repoProducto.ObtenerProductos();
         Assert.NotNull(produtos);
         Assert.NotEmpty(produtos);
 
@@ -26,17 +38,17 @@ public class TestAdoTicket : TestAdo
         //Cargo el ticket con items
         produtos.ForEach(p => ticket.AgregarItem(p, 1));
 
-        Ado.AltaTicket(ticket);
+        repoTicket.AltaTicket(ticket);
         Assert.NotEqual(0, ticket.Id);
     }
 
     [Fact]
     public void AltaTicketRompe()
     {
-        var pepe = Ado.CajeroPorPass(100, "zapatos");
+        var pepe = repoCajero.CajeroPorPass(100, "zapatos");
         Assert.NotNull(pepe);
 
-        var produtos = Ado.ObtenerProductos();
+        var produtos = repoProducto.ObtenerProductos();
         Assert.NotNull(produtos);
         Assert.NotEmpty(produtos);
 
@@ -50,13 +62,13 @@ public class TestAdoTicket : TestAdo
 
         /*Aseguro que la operacion Ado.AltaTicket(ticket), va a devolver una
         excepción del tipo InvalidOperationException*/
-        var excep = Assert.Throws<InvalidOperationException>(() => Ado.AltaTicket(ticket));
+        var excep = Assert.Throws<InvalidOperationException>(() => repoTicket.AltaTicket(ticket));
         Assert.StartsWith("No alcanza stock", excep.Message);
     }
     [Fact]
     public void DetalleTicketOK()
     {
-        var ticket = Ado.ObtenerTicket(1);
+        var ticket = repoTicket.ObtenerTicket(1);
 
         Assert.NotNull(ticket);
         Assert.NotEmpty(ticket.Items);
@@ -65,7 +77,7 @@ public class TestAdoTicket : TestAdo
     [Fact]
     public void DetalleTicketFalla()
     {
-        var ticket = Ado.ObtenerTicket(0);
+        var ticket = repoTicket.ObtenerTicket(0);
 
         Assert.Null(ticket);
     }
