@@ -32,6 +32,7 @@ public class RepoProducto : Repo, IRepoProducto
             //Obtengo el valor de parametro de tipo salida
             categoria.IdCategoria = parametros.Get<byte>("@unIdRubro");
         }
+        //Este Catch es especifico para la conexion MySQL
         catch (MySqlException e)
         {
             if (e.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
@@ -126,8 +127,5 @@ public class RepoProducto : Repo, IRepoProducto
         }
     }
 
-    #endregion
-    #region Ticket
-    
     #endregion
 }
