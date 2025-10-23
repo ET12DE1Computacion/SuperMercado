@@ -31,5 +31,8 @@ public class RepoCajero : Repo, IRepoCajero
             );
     public Cajero? CajeroPorPass(uint dni, string pass)
     //En caso de que exista un cajero, lo devuelve instanciado, caso contrario devuelve NULL.
-        => _conexion.QueryFirstOrDefault<Cajero>(_queryCajeroPass, new { unDni = dni, unaPass = pass });
+        => _conexion.QueryFirstOrDefault<Cajero>(
+            _queryCajeroPass,
+            new { unDni = dni, unaPass = pass }
+            );
 }
