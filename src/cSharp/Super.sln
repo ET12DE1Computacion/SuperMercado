@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Super.Dapper", "Super.Dappe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Super.Test", "Super.Test\Super.Test.csproj", "{40EE8948-F144-433B-8912-346DEE302C36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Super.Winf", "Super.Winf\Super.Winf.csproj", "{412C4053-94A5-4A61-8403-4041D72FB50B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Super.Mvc", "Super.Mvc\Super.Mvc.csproj", "{8CAC005C-D662-40AB-8681-0A86FC634D17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{40EE8948-F144-433B-8912-346DEE302C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40EE8948-F144-433B-8912-346DEE302C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40EE8948-F144-433B-8912-346DEE302C36}.Release|Any CPU.Build.0 = Release|Any CPU
-		{412C4053-94A5-4A61-8403-4041D72FB50B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{412C4053-94A5-4A61-8403-4041D72FB50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{412C4053-94A5-4A61-8403-4041D72FB50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{412C4053-94A5-4A61-8403-4041D72FB50B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CAC005C-D662-40AB-8681-0A86FC634D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CAC005C-D662-40AB-8681-0A86FC634D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CAC005C-D662-40AB-8681-0A86FC634D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CAC005C-D662-40AB-8681-0A86FC634D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
