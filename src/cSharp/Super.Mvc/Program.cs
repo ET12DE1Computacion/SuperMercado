@@ -1,4 +1,36 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("MySQL")
+    ?? throw new InvalidOperationException("No hay conexión");
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>
+(
+    options =>
+    {
+        // Configuracion de las pass
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 6;
+    }
+).AddEntityFrameworkStores<AuthDbContext>();
+
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+    .AddCookie(     IdentityConstants.ApplicationScheme,
+                    options =>
+                    {
+                        // si el usuario no está logueado y trata de acceder a [Authorize], lo redirige aca
+                        options.LoginPath = "/Account/Login";
+                        options.AccessDeniedPath = "/Account/AccessDenied";
+                    }
+                );
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -18,6 +50,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
