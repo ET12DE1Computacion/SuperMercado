@@ -14,7 +14,7 @@ CREATE TABLE Cajero(
 	dni INT UNSIGNED,
 	nombre VARCHAR(45) NOT NULL,
 	apellido VARCHAR(45) NOT NULL,
-	pass CHAR(64) NOT NULL,
+	-- pass CHAR(64) NOT NULL, este atributo se lo delegamos a Identity
 	CONSTRAINT PK_Cajero PRIMARY KEY (dni ASC)
 );
 

@@ -1,0 +1,58 @@
+@* Define el ViewModel que esta vista espera recibir *@
+@model VMLoguinCajero 
+
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                
+                <h4>Ingrese sus credenciales.</h4>
+                
+                @* Muestra un resumen de todos los errores (ej. "DNI o Contraseña inválidos") *@
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                
+                @* Campo para el DNI *@
+                <div class="form-floating mb-3">
+                    <input asp-for="Dni" class="form-control" autocomplete="username" aria-required="true" placeholder="DNI" />
+                    <label asp-for="Dni" class="form-label"></label>
+                    <span asp-validation-for="Dni" class="text-danger"></span>
+                </div>
+                
+                @* Campo para la Contraseña *@
+                <div class="form-floating mb-3">
+                    <input asp-for="Pass" class="form-control" type="password" autocomplete="current-password" aria-required="true" placeholder="Contraseña" />
+                    <label asp-for="Pass" class="form-label"></label>
+                    <span asp-validation-for="Pass" class="text-danger"></span>
+                </div>
+                
+                @* Checkbox para "Recordarme" *@
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="Recuerdame" />
+                    <label class="form-check-label" asp-for="Recuerdame">
+                        @Html.DisplayNameFor(m => m.Recuerdame)
+                    </label>
+                </div>
+                
+                @* Botón de envío *@
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Ingresar</button>
+                </div>
+                
+                @* ¡IMPORTANTE! Incluir el token anti-falsificación por seguridad *@
+                @Html.AntiForgeryToken()
+            </form>
+        </section>
+    </div>
+</div>
+
+@* Esta sección es necesaria para habilitar la validación en el cliente (JavaScript) *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
